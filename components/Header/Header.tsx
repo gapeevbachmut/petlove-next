@@ -7,7 +7,9 @@ const Header = () => {
   return (
     <header className={css.header}>
       <Link href="/" aria-label="Main">
-        Pet Love
+        <svg width={120} height={30}>
+          <use href="/images/sprite.svg#icon-logo"></use>
+        </svg>
       </Link>
       <nav aria-label="Main Navigation">
         <ul className={css.navigation}>
