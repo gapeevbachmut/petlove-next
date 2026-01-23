@@ -6,22 +6,25 @@ import Link from 'next/link';
 const Header = () => {
   return (
     <header className={css.header}>
-      <Link href='/' aria-label='Main'>
+      <Link href="/" aria-label="Main">
         Pet Love
       </Link>
-      <nav aria-label='Main Navigation'>
+      <nav aria-label="Main Navigation">
         <ul className={css.navigation}>
           <li>
-            <Link href='/home'>Home</Link>
+            <Link href="/news">News</Link>
           </li>
           <li>
-            <Link href='/notes'>Notes</Link>
+            <Link href="/notices">Find pet</Link>
           </li>
           <li>
-            <Link href='/profile'>Profile</Link>
+            <Link href="/friends">Our friends</Link>
           </li>
           <li>
-            <Link href='/about'>About</Link>
+            <Link href="/testSvg">SVG</Link>
+          </li>
+          <li>
+            <Link href="/testButton">BUTTON</Link>
           </li>
         </ul>
       </nav>

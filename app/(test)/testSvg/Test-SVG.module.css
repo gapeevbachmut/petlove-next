@@ -1,0 +1,11 @@
+.container {
+    background-color: #fbd58e;
+}
+
+.calendar,
+.down,
+.search {
+    stroke: black;
+    /* fill: white; */
+    fill: transparent;
+}
