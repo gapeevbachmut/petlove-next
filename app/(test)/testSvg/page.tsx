@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import css from './Test-SVG.module.css';
 
 export default function TestSVG() {
@@ -7,6 +8,18 @@ export default function TestSVG() {
         <h1>Test SVG-icons</h1>
         <img src="/images/cat.png" />
         <img src="/images/dog.png" />
+        <Image
+          src="/images/logo_petLove.png"
+          alt="logo"
+          width={105}
+          height={30}
+        />
+        <Image
+          src="/images/logo_petLove_white.png"
+          alt="logo"
+          width={105}
+          height={30}
+        />
         <svg width={105} height={28}>
           <use href="/public/logo.svg"></use>
         </svg>

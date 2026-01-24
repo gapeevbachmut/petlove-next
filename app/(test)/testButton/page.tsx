@@ -1,6 +1,7 @@
 'use client';
 
 import Button from '@/components/Button/Button';
+import ModalOn from '@/components/Modal/ModalOn';
 
 export default function testButton() {
   return (
@@ -32,6 +33,8 @@ export default function testButton() {
       </Button>
       <p>disabled</p>
       <Button disabled>Вимкнена кнопка</Button>
+      <hr />
+      <ModalOn />
     </div>
   );
 }

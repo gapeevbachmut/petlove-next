@@ -1,5 +1,6 @@
 // components/Header/Header.tsx
 
+import Image from 'next/image';
 import css from './Header.module.css';
 import Link from 'next/link';
 
@@ -7,9 +8,12 @@ const Header = () => {
   return (
     <header className={css.header}>
       <Link href="/" aria-label="Main">
-        <svg width={120} height={30}>
-          <use href="/images/sprite.svg#icon-logo"></use>
-        </svg>
+        <Image
+          src="/images/logo_petLove.png"
+          alt="logo"
+          width={105}
+          height={30}
+        />
       </Link>
       <nav aria-label="Main Navigation">
         <ul className={css.navigation}>
