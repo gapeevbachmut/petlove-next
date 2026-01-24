@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import css from './NotFound.module.css';
+import css from './notFound.module.css';
 
 const NotFound = () => {
   return (
