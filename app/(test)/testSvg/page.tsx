@@ -20,18 +20,9 @@ export default function TestSVG() {
           width={105}
           height={30}
         />
-        <svg width={105} height={28}>
-          <use href="/public/logo.svg"></use>
-        </svg>
         <hr />
         <svg width={105} height={30}>
-          <use href="/images/sprite.svg#icon-logo-white-mobile"></use>
-        </svg>
-        <svg width={105} height={30}>
           <use href="/images/sprite.svg#icon-logo-white"></use>
-        </svg>
-        <svg width={105} height={30}>
-          <use href="/images/sprite.svg#icon-logo-mobile"></use>
         </svg>
         <svg width={105} height={30}>
           <use href="/images/sprite.svg#icon-logo"></use>
