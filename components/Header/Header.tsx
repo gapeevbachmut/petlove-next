@@ -16,6 +16,7 @@ const Header = () => {
         />
       </Link>
       <nav aria-label="Main Navigation">
+        {/* навігація для гостя  та авторизованого */}
         <ul className={css.navigation}>
           <li>
             <Link href="/news">News</Link>
@@ -25,12 +26,6 @@ const Header = () => {
           </li>
           <li>
             <Link href="/friends">Our friends</Link>
-          </li>
-          <li>
-            <Link href="/testSvg">SVG</Link>
-          </li>
-          <li>
-            <Link href="/testButton">BUTTON</Link>
           </li>
         </ul>
       </nav>

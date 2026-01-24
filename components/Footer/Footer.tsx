@@ -5,6 +5,14 @@ const Footer = () => {
   const date = new Date().getFullYear();
   return (
     <footer className={css.footer}>
+      <ul>
+        <li>
+          <Link href="/testSvg">SVG</Link>
+        </li>
+        <li>
+          <Link href="/testButton">BUTTON</Link>
+        </li>
+      </ul>
       <p>
         Created by
         <Link href="https://github.com/gapeevbachmut" target="_blank">
