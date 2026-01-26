@@ -3,7 +3,7 @@ import { getNews } from '@/lib/api';
 
 export default async function News() {
   const responce = await getNews();
-  console.log('news', responce);
+  // console.log('news', responce);
 
   return (
     <div>

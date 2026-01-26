@@ -36,7 +36,65 @@ export type NewsListResponce = {
 
 axios.defaults.baseURL = 'https://petlove.b.goit.study/api';
 
+const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms)); //штучна затримка
+
 export const getNews = async () => {
+  await delay(2000); //штучна затримка
+
   const responce = await axios.get<NewsListResponce>('/news');
+  return responce.data;
+};
+
+//  пошук тварин
+
+/* {
+  "page": 1,
+  "perPage": 2,
+  "totalPages": 26,
+  "results": [
+    {
+      "_id": "6589436d05a6bcd9b9379420",
+      "species": "dog",
+      "category": "sell",
+      "price": 150,
+      "title": "Golden Retriever Puppies",
+      "name": "Max",
+      "birthday": "2022-01-10",
+      "comment": "Adorable puppy looking for a loving home.",
+      "sex": "male",
+      "location": "641ffcc1ae4e889a02d25ca5",
+      "imgURL": "https://ftp.goit.study/img/pets/1.webp",
+      "createdAt": "2023-12-11T10:43:28.477Z",
+      "user": "6576e7d0c4cc99fc5ef94221",
+      "popularity": 2,
+      "updatedAt": "2023-12-25T11:41:12.493Z"
+    }, */
+
+// get_notices
+
+export type Notice = {
+  _id: string;
+  species: string;
+  category: string;
+  price: number;
+  title: string;
+  name: string;
+  birthday: string;
+  comme: string;
+  location: string;
+  imgURL: string;
+  user: string;
+  popularity: number;
+};
+
+export type NoticesListResponce = {
+  results: Notice[];
+  totalPages: number;
+};
+
+export const getNotices = async () => {
+  await delay(2000); //штучна затримка
+
+  const responce = await axios.get<NoticesListResponce>('/notices');
   return responce.data;
 };

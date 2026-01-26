@@ -9,7 +9,7 @@ export default function testButton() {
       <h1>TEST BUTTON</h1>
       <p>variant="primary"</p>
       <Button variant="primary">LOG IN</Button>
-      <Button onClick={() => alert('Натиснули!')}>Основна кнопка</Button>
+      <Button onClick={() => alert('It is WORK!!!!')}>Основна кнопка</Button>
       <p>variant="secondary"</p>
       <Button variant="secondary">registration</Button>
       <Button variant="secondary">Другорядна кнопка</Button>
