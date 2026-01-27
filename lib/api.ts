@@ -98,3 +98,48 @@ export const getNotices = async () => {
   const responce = await axios.get<NoticesListResponce>('/notices');
   return responce.data;
 };
+
+//    FRIENDS
+
+/* [
+  {
+    "_id": "658b664c05a6bcd9b937945c",
+    "title": "Sirius",
+    "url": "https://dogcat.com.ua",
+    "addressUrl": "https://goo.gl/maps/iq8NXEUf31EAQCzc6",
+    "imageUrl": "https://ftp.goit.study/img/petsfriends/1.webp",
+    "address": "Fedorivka, Kyiv Oblast, Ukraine, 07372",
+    "workDays": [
+      {
+        "_id": "658f39fccc54e981e2d98778",
+        "isOpen": false
+      },
+      {
+        "_id": "658f39fccc54e981e2d98779",
+        "isOpen": false
+      },
+      { */
+
+export type WorkDay = {
+  _id: string;
+  isOpen: boolean;
+};
+
+export type Friend = {
+  _id: string;
+  title: string;
+  url: string;
+  addressUrl: string;
+  imageUrl: string;
+  address: string;
+  workDays: WorkDay[];
+};
+
+export const getFriends = async () => {
+  await delay(2000); //штучна затримка
+
+  const responce = await axios.get<Friend[]>('/friends');
+  // console.log('api', responce.data);
+
+  return responce.data;
+};

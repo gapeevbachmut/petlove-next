@@ -3,8 +3,6 @@ import Image from 'next/image';
 
 type Props = { item: Notice };
 
-// як відображається одна новина!!!
-
 const NoticesItem = ({ item }: Props) => {
   return (
     <li>
