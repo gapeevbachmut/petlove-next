@@ -36,10 +36,10 @@ export type NewsListResponce = {
 
 axios.defaults.baseURL = 'https://petlove.b.goit.study/api';
 
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms)); //штучна затримка
+// const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms)); //штучна затримка
 
 export const getNews = async () => {
-  await delay(2000); //штучна затримка
+  // await delay(2000); //штучна затримка
 
   const responce = await axios.get<NewsListResponce>('/news');
   return responce.data;
@@ -92,11 +92,13 @@ export type NoticesListResponce = {
   totalPages: number;
 };
 
-export const getNotices = async () => {
-  await delay(2000); //штучна затримка
+export const getNotices = async (page: number) => {
+  const response = await axios.get<NoticesListResponce>('/notices', {
+    params: { page, limit: 6 },
+  });
+  console.log('api', response.data);
 
-  const responce = await axios.get<NoticesListResponce>('/notices');
-  return responce.data;
+  return response.data;
 };
 
 //    FRIENDS
@@ -136,10 +138,10 @@ export type Friend = {
 };
 
 export const getFriends = async () => {
-  await delay(2000); //штучна затримка
+  // await delay(2000); //штучна затримка
 
-  const responce = await axios.get<Friend[]>('/friends');
-  // console.log('api', responce.data);
+  const response = await axios.get<Friend[]>('/friends');
+  // console.log('api', response.data);
 
-  return responce.data;
+  return response.data;
 };

@@ -4,6 +4,7 @@ import { Roboto } from 'next/font/google';
 import css from './mainPage.module.css';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
+import QueryClientProviders from './QueryClientProviders';
 
 const roboto = Roboto({
   variable: '--font-roboto',
@@ -29,9 +30,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={roboto.variable}>
         <div className={css.gluedFooterContainer}>
-          <Header />
-          <main className={css.gluedFooterMain}>{children}</main>
-          <Footer />
+          <QueryClientProviders>
+            <Header />
+            <main className={css.gluedFooterMain}>{children}</main>
+            <Footer />
+          </QueryClientProviders>
         </div>
       </body>
     </html>
