@@ -92,13 +92,20 @@ export type NoticesListResponce = {
   totalPages: number;
 };
 
-export const getNotices = async (page: number) => {
-  const response = await axios.get<NoticesListResponce>('/notices', {
-    params: { page, limit: 6 },
-  });
-  console.log('api', response.data);
+//  серверна пагінація тут не працює!!!!
+//  перероблю на клієнтську!!!!!
 
-  return response.data;
+// export const getNotices = async (page: number) => {
+export const getNotices = async (): Promise<Notice[]> => {
+  const response = await axios.get<NoticesListResponce>('/notices', {
+    // params: { page, limit: 6 },
+    params: { limit: 100 },
+  });
+  // console.log('api', response.data);
+  console.log('api', response.data.results);
+
+  // return response.data;
+  return response.data.results;
 };
 
 //    FRIENDS
