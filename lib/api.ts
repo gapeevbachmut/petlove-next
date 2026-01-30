@@ -38,27 +38,14 @@ axios.defaults.baseURL = 'https://petlove.b.goit.study/api';
 
 // const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms)); //штучна затримка
 
-/*
-export const getNews = async () => {
-  // await delay(2000); //штучна затримка
-
-  const responce = await axios.get<NewsListResponce>('/news');
-  return responce.data;
-};*/
-
-// export const getNews = async (): Promise<News[]> => {
 export const getNews = async (page: number) => {
   // await delay(2000); //штучна затримка
 
   const response = await axios.get<NewsListResponce>('/news', {
     params: { page, limit: 6 },
-    // params: { limit: 500 },
   });
   console.log('api-news', response.data);
-
   return response.data;
-
-  // return response.data.results;
 };
 
 // ---------------------------- пошук тварин

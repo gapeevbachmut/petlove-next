@@ -1,6 +1,5 @@
 'use client';
 
-import Error from '@/app/error';
 import Loading from '@/app/loading';
 import NewsList from '@/components/NewsList/NewsList';
 import { getNews } from '@/lib/api';
@@ -8,12 +7,13 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import css from './NewsClient.module.css';
+import ErrorMessage from '@/app/ErrorMessage';
 
 export default function NewsClient() {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { data, isLoading, isError, isSuccess } = useQuery({
-    queryKey: ['notices', currentPage],
+  const { data, isLoading, isError, error, isSuccess, refetch } = useQuery({
+    queryKey: ['news', currentPage],
     queryFn: () => getNews(currentPage),
     placeholderData: keepPreviousData,
   });
@@ -25,7 +25,9 @@ export default function NewsClient() {
     <div>
       <h1>News page CLIENT</h1>
       {isLoading && <Loading />}
-      {/* {isError && <Error />} */}
+      {isError && (
+        <ErrorMessage message={(error as Error).message} onRetry={refetch} />
+      )}
       {isError && <p>Whoops, something went wrong! Please try again!</p>}
       {isSuccess && data?.results?.length > 0 && (
         <NewsList results={data.results} />
