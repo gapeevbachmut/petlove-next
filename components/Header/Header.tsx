@@ -1,8 +1,10 @@
 // components/Header/Header.tsx
 
+'use client';
 import Image from 'next/image';
 import css from './Header.module.css';
 import Link from 'next/link';
+import Button from '../Button/Button';
 
 const Header = () => {
   return (
@@ -29,6 +31,28 @@ const Header = () => {
           </li>
         </ul>
       </nav>
+      <div>
+        {/* //
+        //
+        // зробити компонент навігації користувачів та юзерів
+        //
+        // */}
+        <ul>
+          <li>
+            <Link href="/login">Log In</Link>
+            {/* <Button onClick={() => alert('It is WORK - Log In!!!!')}>
+                Log In
+              </Button> */}
+          </li>
+          <li>
+            <Link href="/register">
+              <Button onClick={() => alert('It is WORK - Log In!!!!')}>
+                Registration
+              </Button>
+            </Link>
+          </li>
+        </ul>
+      </div>
     </header>
   );
 };
