@@ -92,19 +92,25 @@ export type NoticesListResponce = {
   totalPages: number;
 };
 
-//  серверна пагінація тут не працює!!!!
-//  перероблю на клієнтську!!!!!
+//  ---------------- серверна пагінація тут не працює!!!!
+//  ---------------- перероблю на клієнтську!!!!!
 
-// export const getNotices = async (page: number) => {
+/*
+export const getNotices = async (page: number) => {
+  const response = await axios.get<NoticesListResponce>('/notices', {
+    params: { page, limit: 6 },
+  });
+  console.log('api', response.data);
+  return response.data;
+};
+*/
+
+///////////////////////////
 export const getNotices = async (): Promise<Notice[]> => {
   const response = await axios.get<NoticesListResponce>('/notices', {
-    // params: { page, limit: 6 },
     params: { limit: 100 },
   });
-  // console.log('api', response.data);
-  console.log('api', response.data.results);
-
-  // return response.data;
+  // console.log('api', response.data.results);
   return response.data.results;
 };
 
