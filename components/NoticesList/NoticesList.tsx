@@ -1,4 +1,4 @@
-import { Notice } from '@/lib/api';
+import { type Notice } from '@/types/api-types';
 import NoticesItem from '../NoticesItem/NoticesItem';
 
 type Props = { results: Notice[] };

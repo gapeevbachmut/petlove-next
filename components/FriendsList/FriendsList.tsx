@@ -1,4 +1,4 @@
-import { Friend } from '@/lib/api';
+import { type Friend } from '@/types/api-types';
 import FriendsItem from '../FriendsItem/FriendsItem';
 
 type Props = { friends: Friend[] };

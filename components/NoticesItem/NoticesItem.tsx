@@ -1,4 +1,4 @@
-import { Notice } from '@/types/api-types';
+import { type Notice } from '@/types/api-types';
 import Image from 'next/image';
 import Link from 'next/link';
 
