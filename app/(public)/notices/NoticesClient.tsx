@@ -4,7 +4,7 @@
 /* 
 'use client';
 
-import Error from '@/app/error';
+import ErrorMessage from '@/app/ErrorMessage';
 import Loading from '@/app/loading';
 import NoticesList from '@/components/NoticesList/NoticesList';
 import { getNotices } from '@/lib/api';
@@ -15,7 +15,7 @@ import css from './NoticesClient.module.css';
 
 export default function NoticesClient() {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, isLoading, isError, isSuccess } = useQuery({
+  const { data, isLoading, isError, error, isSuccess, refetch } = useQuery({
     queryKey: ['notices', currentPage],
     queryFn: () => getNotices(currentPage),
     placeholderData: keepPreviousData,
@@ -27,13 +27,12 @@ export default function NoticesClient() {
   console.log('page:', currentPage, 'results:', data?.results);
 
   return (
-    <div>
-      <main>
-        <div>
+       <div>
           <h1>Find pet page client</h1>
           {isLoading && <Loading />}
-          //  {isError && <Error />}
-          {isError && <p>Whoops, something went wrong! Please try again!</p>}
+          {isError && (
+             <ErrorMessage message={(error as Error).message} onRetry={refetch} />
+          )}       
           {isSuccess && data?.results?.length > 0 && (
             <NoticesList results={data.results} />
           )}
@@ -49,11 +48,12 @@ export default function NoticesClient() {
             previousLabel="←"
           />
         </div>
-      </main>
-    </div>
-  );
+      );
 }*/
 /////////////////
+
+//  ------------------  клієнтська пагінація
+
 'use client';
 
 import Loading from '@/app/loading';
@@ -87,26 +87,22 @@ export default function NoticesClient() {
 
   return (
     <div>
-      <main>
-        <div>
-          <h1>Find pet page client</h1>
-          {isLoading ? <Loading /> : <NoticesList results={paginatedResults} />}
+      <h1>Find pet page client</h1>
+      {isLoading ? <Loading /> : <NoticesList results={paginatedResults} />}
 
-          {pageCount > 1 && (
-            <ReactPaginate
-              pageCount={pageCount}
-              pageRangeDisplayed={3}
-              marginPagesDisplayed={1}
-              onPageChange={({ selected }) => setCurrentPage(selected + 1)}
-              forcePage={currentPage - 1}
-              containerClassName={css.pagination}
-              activeClassName={css.active}
-              nextLabel="→"
-              previousLabel="←"
-            />
-          )}
-        </div>
-      </main>
+      {pageCount > 1 && (
+        <ReactPaginate
+          pageCount={pageCount}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={1}
+          onPageChange={({ selected }) => setCurrentPage(selected + 1)}
+          forcePage={currentPage - 1}
+          containerClassName={css.pagination}
+          activeClassName={css.active}
+          nextLabel="→"
+          previousLabel="←"
+        />
+      )}
     </div>
   );
 }

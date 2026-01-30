@@ -7,7 +7,9 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import css from './NewsClient.module.css';
-import ErrorMessage from '@/app/ErrorMessage';
+import ErrorMessage from '@/app/error';
+import Button from '@/components/Button/Button';
+import { News } from '@/types/api-types';
 
 export default function NewsClient() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -19,7 +21,16 @@ export default function NewsClient() {
   });
   const totalPages = data?.totalPages ?? 0;
 
-  console.log('page:', currentPage, 'results:', data?.results);
+  //   console.log('page:', currentPage, 'results:', data?.results);
+
+  const [news, setNews] = useState<News[]>([]);
+
+  const handleClick = async () => {
+    const response = await getNews(currentPage);
+    if (response?.results) {
+      setNews(response.results);
+    }
+  };
 
   return (
     <div>
@@ -28,7 +39,6 @@ export default function NewsClient() {
       {isError && (
         <ErrorMessage message={(error as Error).message} onRetry={refetch} />
       )}
-      {isError && <p>Whoops, something went wrong! Please try again!</p>}
       {isSuccess && data?.results?.length > 0 && (
         <NewsList results={data.results} />
       )}
@@ -43,6 +53,10 @@ export default function NewsClient() {
         nextLabel="→"
         previousLabel="←"
       />
+      <hr />
+      <h4>Just test - news only after CLICK</h4>
+      <Button onClick={handleClick}> Get my NEWS</Button>
+      {news.length > 0 && <NewsList results={news} />}
     </div>
   );
 }

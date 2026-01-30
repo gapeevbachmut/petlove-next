@@ -7,12 +7,8 @@ export default async function Friends() {
 
   return (
     <div>
-      <main>
-        <div>
-          <h1>Friends page</h1>
-          {friends?.length > 0 && <FriendsList friends={friends} />}
-        </div>
-      </main>
+      <h1>Friends page</h1>
+      {friends?.length > 0 && <FriendsList friends={friends} />}
     </div>
   );
 }

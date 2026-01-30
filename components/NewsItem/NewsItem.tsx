@@ -1,4 +1,5 @@
-import { News } from '@/lib/api';
+import { type News } from '@/types/api-types';
+import Link from 'next/link';
 
 type Props = { item: News };
 

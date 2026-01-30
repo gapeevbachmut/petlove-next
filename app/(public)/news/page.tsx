@@ -8,15 +8,8 @@ export default async function News() {
 
   return (
     <div>
-      <main>
-        <div>
-          <h1>News page</h1>
-          <NewsClient />
-          {/* {responce?.results?.length > 0 && (
-            <NewsList results={responce.results} />
-          )} */}
-        </div>
-      </main>
+      <h1>News page</h1>
+      <NewsClient />
     </div>
   );
 }

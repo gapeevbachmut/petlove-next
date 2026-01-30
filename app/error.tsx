@@ -12,11 +12,11 @@ const ErrorMessage = ({ message, onRetry }: Props) => {
     <div>
       <h2>Error while loading</h2>
       <p>{message}</p>
-      {onRetry && (
-        <Button variant="primary" onClick={onRetry}>
-          Try again
-        </Button>
-      )}
+      <p>Whoops, something went wrong! Please try again!</p>
+
+      <Button variant="primary" onClick={onRetry}>
+        Try again
+      </Button>
     </div>
   );
 };
