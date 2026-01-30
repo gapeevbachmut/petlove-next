@@ -1,4 +1,4 @@
-import { Friend } from '@/lib/api';
+import { type Friend } from '@/types/api-types';
 import Image from 'next/image';
 
 type Props = { item: Friend };
