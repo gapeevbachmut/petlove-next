@@ -4,7 +4,7 @@
 import Image from 'next/image';
 import css from './Header.module.css';
 import Link from 'next/link';
-import Button from '../Button/Button';
+import AuthNavigation from '../AuthNavigation/AuthNavigation';
 
 const Header = () => {
   return (
@@ -18,7 +18,6 @@ const Header = () => {
         />
       </Link>
       <nav aria-label="Main Navigation">
-        {/* навігація для гостя  та авторизованого */}
         <ul className={css.navigation}>
           <li>
             <Link href="/news">News</Link>
@@ -32,26 +31,8 @@ const Header = () => {
         </ul>
       </nav>
       <div>
-        {/* //
-        //
-        // зробити компонент навігації користувачів та юзерів
-        //
-        // */}
-        <ul>
-          <li>
-            <Link href="/login">Log In</Link>
-            {/* <Button onClick={() => alert('It is WORK - Log In!!!!')}>
-                Log In
-              </Button> */}
-          </li>
-          <li>
-            <Link href="/register">
-              <Button onClick={() => alert('It is WORK - Log In!!!!')}>
-                Registration
-              </Button>
-            </Link>
-          </li>
-        </ul>
+        {/* навігація для гостя  та авторизованого */}
+        <AuthNavigation />
       </div>
     </header>
   );

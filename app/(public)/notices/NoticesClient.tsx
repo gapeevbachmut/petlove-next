@@ -61,13 +61,16 @@ import NoticesList from '@/components/NoticesList/NoticesList';
 import { getNotices } from '@/lib/api';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
-import ReactPaginate from 'react-paginate';
-import css from './NoticesClient.module.css';
+import Pagination from '@/components/Pagination/Pagination';
 
 export default function NoticesClient() {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { data = [], isLoading } = useQuery({
+  const {
+    data = [],
+    isLoading,
+    isSuccess,
+  } = useQuery({
     queryKey: ['notices'],
     queryFn: getNotices,
     placeholderData: keepPreviousData,
@@ -85,23 +88,24 @@ export default function NoticesClient() {
 
   const paginatedResults = data?.slice(start, end) ?? [];
 
+  const handlePageChange = ({ selected }: { selected: number }) => {
+    setCurrentPage(selected + 1);
+  };
+
   return (
     <div>
       <h1>Find pet page client</h1>
-      {isLoading ? <Loading /> : <NoticesList results={paginatedResults} />}
+      {isLoading && <Loading />}
 
-      {pageCount > 1 && (
-        <ReactPaginate
-          pageCount={pageCount}
-          pageRangeDisplayed={3}
-          marginPagesDisplayed={1}
-          onPageChange={({ selected }) => setCurrentPage(selected + 1)}
-          forcePage={currentPage - 1}
-          containerClassName={css.pagination}
-          activeClassName={css.active}
-          nextLabel="→"
-          previousLabel="←"
-        />
+      {isSuccess && data.length > 0 && (
+        <>
+          <NoticesList results={paginatedResults} />
+          <Pagination
+            totalPages={pageCount}
+            onPageChange={handlePageChange}
+            currentPage={currentPage}
+          />
+        </>
       )}
     </div>
   );

@@ -8,7 +8,6 @@ export default async function News() {
 
   return (
     <div>
-      <h1>News page</h1>
       <NewsClient />
     </div>
   );
