@@ -2,6 +2,7 @@
 
 import ReactPaginate from 'react-paginate';
 import css from './Pagination.module.css';
+import Button from '../Button/Button';
 
 interface PaginationProps {
   totalPages: number;
@@ -19,18 +20,20 @@ export default function Pagination({
   }
   return (
     <>
-      <ReactPaginate
-        breakLabel="..."
-        pageCount={totalPages}
-        pageRangeDisplayed={5}
-        marginPagesDisplayed={1}
-        onPageChange={onPageChange}
-        forcePage={currentPage - 1}
-        containerClassName={css.pagination}
-        activeClassName={css.active}
-        nextLabel=">"
-        previousLabel="<"
-      />
+      <div className={css.wrapper}>
+        <ReactPaginate
+          breakLabel="..."
+          pageCount={totalPages} // кількість сторінок
+          pageRangeDisplayed={3} // кількість номерів показувати у центрі
+          marginPagesDisplayed={1} // кількість по краях
+          onPageChange={onPageChange}
+          forcePage={currentPage - 1}
+          containerClassName={css.pagination}
+          activeClassName={css.active}
+          nextLabel=">" // наступна
+          previousLabel="<" //  попередня
+        />
+      </div>
     </>
   );
 }

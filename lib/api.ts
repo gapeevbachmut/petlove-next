@@ -17,9 +17,9 @@ axios.defaults.baseURL = 'https://petlove.b.goit.study/api';
 // const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms)); //штучна затримка
 // await delay(2000); //штучна затримка - у запит поставити
 
-export const getNews = async (page: number) => {
+export const getNews = async (page: number, keyword: string) => {
   const response = await axios.get<NewsListResponce>('/news', {
-    params: { page, limit: 6 },
+    params: { page, limit: 6, keyword },
   });
   // console.log('api-news', response.data);
   return response.data;
