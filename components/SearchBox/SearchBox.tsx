@@ -1,31 +1,32 @@
-import { useState } from 'react';
+'use client';
+
 import css from './SearchBox.module.css';
-import { useDebouncedCallback } from 'use-debounce';
 
 interface SearchBoxProps {
-  onChange: (search: string) => void;
+  onSubmit: (value: string) => void;
 }
 
-export default function SearchBox({ onChange }: SearchBoxProps) {
-  const [inputValue, setInputValue] = useState('');
+export default function SearchBox({ onSubmit }: SearchBoxProps) {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-  const debouncedSearch = useDebouncedCallback((value: string) => {
-    onChange(value);
-  }, 500);
+    const formData = new FormData(event.currentTarget);
+    const value = (formData.get('searchValue') as string) ?? '';
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setInputValue(value);
-    debouncedSearch(value);
+    onSubmit(value.trim());
   };
 
   return (
-    <input
-      className={css.input}
-      type="text"
-      placeholder="Search"
-      value={inputValue}
-      onChange={handleChange}
-    />
+    <form className={css.form} onSubmit={handleSubmit}>
+      <input
+        className={css.input}
+        type="text"
+        placeholder="Search"
+        name="searchValue"
+      />
+      <button className={css.button} type="submit">
+        Search
+      </button>
+    </form>
   );
 }

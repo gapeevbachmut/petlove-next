@@ -33,7 +33,7 @@ export default function NewsClient() {
   return (
     <div>
       <h1>News page CLIENT</h1>
-      <SearchBox onChange={handleSearchChange} />
+      <SearchBox onSubmit={handleSearchChange} />
 
       {isLoading && <Loading />}
       {isError && (
@@ -42,13 +42,17 @@ export default function NewsClient() {
       {isSuccess && data?.results?.length > 0 && (
         <>
           <NewsList results={data.results} />
-          <Pagination
-            totalPages={data.totalPages}
-            onPageChange={handlePageChange}
-            currentPage={currentPage}
-          />
+          {totalPages > 1 && (
+            <Pagination
+              totalPages={totalPages}
+              currentPage={currentPage}
+              onPageChange={handlePageChange}
+            />
+          )}
         </>
       )}
+
+      {isSuccess && data?.results?.length === 0 && <p>No results found</p>}
     </div>
   );
 }
