@@ -1,8 +1,29 @@
+.form {
+    display: flex;
+    align-items: center;
+    width: 230px;
+    position: relative;
+}
+
 .input {
     flex: 1;
-    max-width: 240px;
-    padding: 6px 12px;
+    width: 100%;
+    padding: 14px;
     font-size: 16px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
+    border: 1px solid rgba(38, 38, 38, 0.15);
+    border-radius: 30px;
+}
+
+.searchSvg {
+    stroke: black;
+    fill: transparent;
+}
+
+.buttonSearch {
+    padding: 14px;
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
 }

@@ -24,8 +24,11 @@ export default function SearchBox({ onSubmit }: SearchBoxProps) {
         placeholder="Search"
         name="searchValue"
       />
-      <button className={css.button} type="submit">
-        Search
+
+      <button className={css.buttonSearch} type="submit">
+        <svg width={18} height={18} className={css.searchSvg}>
+          <use href="/images/sprite.svg#icon-search"></use>
+        </svg>
       </button>
     </form>
   );
