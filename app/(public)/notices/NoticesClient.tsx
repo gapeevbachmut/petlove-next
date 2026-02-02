@@ -1,55 +1,60 @@
 //  ---------------- серверна пагінація тут не працює!!!!
 //  ---------------- перероблю на клієнтську!!!!!
 
-/* 
-'use client';
+// 'use client';
 
-import ErrorMessage from '@/app/ErrorMessage';
-import Loading from '@/app/loading';
-import NoticesList from '@/components/NoticesList/NoticesList';
-import { getNotices } from '@/lib/api';
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
-import ReactPaginate from 'react-paginate';
-import css from './NoticesClient.module.css';
+// import Loading from '@/app/loading';
+// import NoticesList from '@/components/NoticesList/NoticesList';
+// import { getNotices } from '@/lib/api';
+// import {
+//   keepPreviousData,
+//   useInfiniteQuery,
+//   useQuery,
+// } from '@tanstack/react-query';
+// import { useState } from 'react';
+// import css from './NoticesClient.module.css';
+// import Pagination from '@/components/Pagination/Pagination';
+// import ErrorMessage from '@/app/error';
 
-export default function NoticesClient() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const { data, isLoading, isError, error, isSuccess, refetch } = useQuery({
-    queryKey: ['notices', currentPage],
-    queryFn: () => getNotices(currentPage),
-    placeholderData: keepPreviousData,
-  });
+// export default function NoticesClient() {
+//   const [currentPage, setCurrentPage] = useState(1);
 
-  //   const responce = getNotices(currentPage);
-  const totalPages = data?.totalPages ?? 0;
+//   const { data, isLoading, isError, error, isSuccess, refetch } = useQuery({
+//     queryKey: ['notices', currentPage],
+//     queryFn: () => getNotices(currentPage),
+//     placeholderData: keepPreviousData,
+//   });
 
-  console.log('page:', currentPage, 'results:', data?.results);
+//   // const totalPages = data?.totalPages ?? 0;
 
-  return (
-       <div>
-          <h1>Find pet page client</h1>
-          {isLoading && <Loading />}
-          {isError && (
-             <ErrorMessage message={(error as Error).message} onRetry={refetch} />
-          )}       
-          {isSuccess && data?.results?.length > 0 && (
-            <NoticesList results={data.results} />
-          )}
-          <ReactPaginate
-            pageCount={totalPages}
-            pageRangeDisplayed={5}
-            marginPagesDisplayed={1}
-            onPageChange={({ selected }) => setCurrentPage(selected + 1)}
-            forcePage={currentPage - 1}
-            containerClassName={css.pagination}
-            activeClassName={css.active}
-            nextLabel="→"
-            previousLabel="←"
-          />
-        </div>
-      );
-}*/
+//   const totalPages = 9;
+
+//   const handlePageChange = ({ selected }: { selected: number }) => {
+//     setCurrentPage(selected + 1);
+//   };
+//   return (
+//     <div>
+//       <h1>Find pet page client</h1>
+//       {isLoading && <Loading />}
+//       {isError && (
+//         <ErrorMessage message={(error as Error).message} onRetry={refetch} />
+//       )}
+
+//       {isLoading && <Loading />}
+
+//       {isSuccess && data?.results?.length > 0 && (
+//         <>
+//           <NoticesList results={data.results} />
+//           <Pagination
+//             totalPages={totalPages}
+//             onPageChange={handlePageChange}
+//             currentPage={currentPage}
+//           />
+//         </>
+//       )}
+//     </div>
+//   );
+// }
 /////////////////
 
 //  ------------------  клієнтська пагінація
@@ -60,7 +65,7 @@ import Loading from '@/app/loading';
 import NoticesList from '@/components/NoticesList/NoticesList';
 import { getNotices } from '@/lib/api';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Pagination from '@/components/Pagination/Pagination';
 
 export default function NoticesClient() {
@@ -73,12 +78,8 @@ export default function NoticesClient() {
   } = useQuery({
     queryKey: ['notices'],
     queryFn: getNotices,
-    placeholderData: keepPreviousData,
+    // placeholderData: keepPreviousData,
   });
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [data]);
 
   const ITEMS_PER_PAGE = 6;
   const pageCount = Math.ceil(data.length / ITEMS_PER_PAGE);
@@ -94,7 +95,8 @@ export default function NoticesClient() {
 
   return (
     <div>
-      <h1>Find pet page client</h1>
+      <h1>Find your favorite pet</h1>
+
       {isLoading && <Loading />}
 
       {isSuccess && data.length > 0 && (

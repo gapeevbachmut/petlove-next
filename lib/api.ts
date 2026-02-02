@@ -30,15 +30,13 @@ export const getNews = async (page: number, keyword: string) => {
 //  ---------------- серверна пагінація тут не працює!!!!
 //  ---------------- перероблю на клієнтську!!!!!
 
-/*
-export const getNotices = async (page: number) => {
-  const response = await axios.get<NoticesListResponce>('/notices', {
-    params: { page, limit: 6 },
-  });
-  console.log('api', response.data);
-  return response.data;
-};
-*/
+// export const getNotices = async (page: number) => {
+//   const response = await axios.get<NoticesListResponce>('/notices', {
+//     params: { page, limit: 6 },
+//   });
+//   console.log('api', response.data);
+//   return response.data;
+// };
 
 ///////////////////////////
 export const getNotices = async (): Promise<Notice[]> => {

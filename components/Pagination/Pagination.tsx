@@ -2,7 +2,6 @@
 
 import ReactPaginate from 'react-paginate';
 import css from './Pagination.module.css';
-import Button from '../Button/Button';
 
 interface PaginationProps {
   totalPages: number;
@@ -19,22 +18,9 @@ export default function Pagination({
     return null;
   }
 
-  const isFirstPage = currentPage === 1;
-  const isLastPage = currentPage === totalPages;
-
   return (
     <>
       <div className={css.wrapper}>
-        {/* << FIRST */}
-        {/* <button
-          className={css.control}
-          disabled={isFirstPage}
-          onClick={() => onPageChange(1)}
-        >
-          {'<<'}
-        </button> */}
-        {/* < PREV */}
-
         <ReactPaginate
           breakLabel="..."
           pageCount={totalPages} // кількість сторінок
@@ -53,14 +39,6 @@ export default function Pagination({
           nextLabel=">" // наступна
           previousLabel="<" //  попередня
         />
-        {/* >> LAST */}
-        {/* <button
-          className={css.control}
-          disabled={isLastPage}
-          onClick={() => onPageChange(totalPages)}
-        >
-          {'>>'}
-        </button> */}
       </div>
     </>
   );

@@ -6,7 +6,6 @@ import { getNews } from '@/lib/api';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import ErrorMessage from '@/app/error';
-import { News } from '@/types/api-types';
 import Pagination from '@/components/Pagination/Pagination';
 import SearchBox from '@/components/SearchBox/SearchBox';
 
@@ -32,7 +31,7 @@ export default function NewsClient() {
 
   return (
     <div>
-      <h1>News page CLIENT</h1>
+      <h1>News</h1>
       <SearchBox onSubmit={handleSearchChange} />
 
       {isLoading && <Loading />}
