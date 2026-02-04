@@ -13,18 +13,18 @@ export default function SelectCategory({
   value,
   onChange,
 }: SelectCategoryProps) {
-  const { data = [], isLoading } = useQuery({
+  const { data = [] } = useQuery({
     queryKey: ['notice-categories'],
     queryFn: getNoticeCategories,
-    staleTime: 1000 * 60 * 5, // 5 хв кеш
+    // staleTime: 1000 * 60 * 5, // 5 хв кеш
   });
 
   return (
     <SelectField
-      //   label="Category"
       options={data}
       value={value}
-      placeholder={isLoading ? 'Loading...' : 'Show all'}
+      placeholder="Category"
+      showAllLabel="Show all"
       onChange={onChange}
     />
   );

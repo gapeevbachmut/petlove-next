@@ -10,18 +10,18 @@ interface SelectSexProps {
 }
 
 export default function SelectSex({ value, onChange }: SelectSexProps) {
-  const { data = [], isLoading } = useQuery({
+  const { data = [] } = useQuery({
     queryKey: ['notice-sex'],
     queryFn: getNoticeSex,
-    staleTime: 1000 * 60 * 5, // 5 хв кеш
+    // staleTime: 1000 * 60 * 5, // 5 хв кеш
   });
 
   return (
     <SelectField
-      //   label="Sex"
       options={data}
       value={value}
-      placeholder={isLoading ? 'Loading...' : 'Show all'}
+      placeholder="By gender"
+      showAllLabel="Show all"
       onChange={onChange}
     />
   );

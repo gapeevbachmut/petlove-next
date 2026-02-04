@@ -22,7 +22,6 @@ export default function SelectLocation({
 
   return (
     <Select
-      //   label="Location"
       options={options}
       value={selecteOption}
       placeholder="Location"

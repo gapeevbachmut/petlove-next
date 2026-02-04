@@ -10,18 +10,18 @@ interface SelectSpeciesProps {
 }
 
 export default function SelectSpecies({ value, onChange }: SelectSpeciesProps) {
-  const { data = [], isLoading } = useQuery({
+  const { data = [] } = useQuery({
     queryKey: ['notice-species'],
     queryFn: getNoticeSpecies,
-    staleTime: 1000 * 60 * 5, // 5 хв кеш
+    // staleTime: 1000 * 60 * 5, // 5 хв кеш
   });
 
   return (
     <SelectField
-      //   label="Species"
       options={data}
       value={value}
-      placeholder={isLoading ? 'Loading...' : 'Show all'}
+      placeholder="By type"
+      showAllLabel="Show all"
       onChange={onChange}
     />
   );
