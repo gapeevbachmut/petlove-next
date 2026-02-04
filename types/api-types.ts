@@ -24,6 +24,7 @@ export type Notice = {
   price: number;
   title: string;
   name: string;
+  sex: string;
   birthday: string;
   comme: string;
   location: string;

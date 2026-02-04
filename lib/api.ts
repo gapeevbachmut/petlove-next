@@ -55,6 +55,21 @@ export const getSingleNotice = async (id: string, token: string) => {
   return response.data;
 };
 
+// запит категорій
+
+export const getNoticeCategories = async () => {
+  const response = await axios.get<string[]>('/notices/categories');
+
+  return response.data;
+};
+
+// запит гендер / пол
+export const getNoticeSex = async () => {
+  const response = await axios.get<string[]>('/notices/sex');
+
+  return response.data;
+};
+
 // ---------------------------------   FRIENDS
 
 export const getFriends = async () => {

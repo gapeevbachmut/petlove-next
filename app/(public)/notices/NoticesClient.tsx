@@ -92,10 +92,34 @@ export default function NoticesClient() {
     // placeholderData: keepPreviousData,
   });
 
-  const filteredData = data.filter(item =>
-    item.title.toLowerCase().includes(filters.search.toLowerCase())
-  );
+  const filteredData = data.filter(item => {
+    if (
+      filters.search &&
+      !item.title.toLowerCase().includes(filters.search.toLowerCase())
+    ) {
+      return false;
+    }
 
+    if (filters.category && item.category !== filters.category) {
+      return false;
+    }
+
+    if (filters.sex && item.sex !== filters.sex) {
+      return false;
+    }
+
+    if (filters.species && item.species !== filters.species) {
+      return false;
+    }
+
+    if (filters.location && item.location !== filters.location) {
+      return false;
+    }
+
+    return true;
+  });
+
+  /////////////-----------------
   const ITEMS_PER_PAGE = 6;
   const pageCount = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
 
