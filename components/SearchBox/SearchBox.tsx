@@ -1,35 +1,67 @@
 'use client';
 
 import css from './SearchBox.module.css';
+import { useState, useEffect } from 'react';
 
 interface SearchBoxProps {
+  value?: string;
   onSubmit: (value: string) => void;
 }
 
-export default function SearchBox({ onSubmit }: SearchBoxProps) {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+export default function SearchBox({ value = '', onSubmit }: SearchBoxProps) {
+  const [inputValue, setInputValue] = useState(value);
 
-    const formData = new FormData(event.currentTarget);
-    const value = (formData.get('searchValue') as string) ?? '';
+  useEffect(() => {
+    setInputValue(value);
+  }, [value]);
 
-    onSubmit(value.trim());
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      onSubmit(inputValue.trim());
+    }
+  };
+
+  const handleClear = () => {
+    setInputValue('');
+    onSubmit('');
   };
 
   return (
-    <form className={css.form} onSubmit={handleSubmit}>
+    <div className={css.wrapper}>
       <input
         className={css.input}
         type="text"
         placeholder="Search"
-        name="searchValue"
+        value={inputValue}
+        onChange={event => {
+          setInputValue(event.target.value);
+        }}
+        onKeyDown={handleKeyDown}
       />
+      {inputValue && (
+        <button
+          type="button"
+          className={css.buttonClear}
+          onClick={handleClear}
+          aria-label="Clear search"
+        >
+          <svg width={18} height={18} className={css.closeSvg}>
+            <use href="/images/sprite.svg#icon-cross-small" />
+          </svg>
+        </button>
+      )}
 
-      <button className={css.buttonSearch} type="submit">
+      <button
+        type="button"
+        className={css.buttonSearch}
+        onClick={() => onSubmit(inputValue.trim())}
+        aria-label="Search"
+      >
         <svg width={18} height={18} className={css.searchSvg}>
-          <use href="/images/sprite.svg#icon-search"></use>
+          <use href="/images/sprite.svg#icon-search" />
         </svg>
       </button>
-    </form>
+    </div>
   );
 }

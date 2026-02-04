@@ -67,9 +67,20 @@ import { getNotices } from '@/lib/api';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import Pagination from '@/components/Pagination/Pagination';
+import NoticesFilters from '@/components/NoticesFilters/NoticesFilters';
+import { type NoticesFiltersState } from '@/types/types';
 
 export default function NoticesClient() {
   const [currentPage, setCurrentPage] = useState(1);
+  // стан фільтрів
+  const [filters, setFilters] = useState<NoticesFiltersState>({
+    search: '',
+    category: null,
+    sex: null,
+    species: null,
+    location: null,
+    sortBy: null,
+  });
 
   const {
     data = [],
@@ -81,16 +92,32 @@ export default function NoticesClient() {
     // placeholderData: keepPreviousData,
   });
 
+  const filteredData = data.filter(item =>
+    item.title.toLowerCase().includes(filters.search.toLowerCase())
+  );
+
   const ITEMS_PER_PAGE = 6;
-  const pageCount = Math.ceil(data.length / ITEMS_PER_PAGE);
+  const pageCount = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
 
   const start = (currentPage - 1) * ITEMS_PER_PAGE;
   const end = start + ITEMS_PER_PAGE;
 
-  const paginatedResults = data?.slice(start, end) ?? [];
+  const paginatedResults = filteredData?.slice(start, end) ?? [];
 
   const handlePageChange = ({ selected }: { selected: number }) => {
     setCurrentPage(selected + 1);
+  };
+
+  const handleFiltersReset = () => {
+    setCurrentPage(1);
+    setFilters({
+      search: '',
+      category: null,
+      sex: null,
+      species: null,
+      location: null,
+      sortBy: null,
+    });
   };
 
   return (
@@ -101,6 +128,15 @@ export default function NoticesClient() {
 
       {isSuccess && data.length > 0 && (
         <>
+          <NoticesFilters
+            filters={filters}
+            onChange={nextFilters => {
+              setCurrentPage(1);
+              setFilters(nextFilters);
+            }}
+            onReset={handleFiltersReset}
+          />
+
           <NoticesList results={paginatedResults} />
           <Pagination
             totalPages={pageCount}
