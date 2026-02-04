@@ -1,18 +1,23 @@
-import { type NoticesFiltersState } from '@/types/types';
+import { LocationOption, type NoticesFiltersState } from '@/types/types';
 import SearchBox from '../SearchBox/SearchBox';
-import Select from 'react-select';
-import { useState } from 'react';
+// import Select from 'react-select';
+// import { useState } from 'react';
 import SelectCategory from '../SelectCategory/SelectCategory';
 import SelectSex from '../SelectSex/SelectSex';
+import SelectSpecies from '../SelectSpecies/SelectSpecies';
+import SelectLocation from '../SelectLocation/SelectLocation';
 
 interface NoticesFiltersProps {
   filters: NoticesFiltersState;
+  locationOptions: LocationOption[];
+
   onChange: (filters: NoticesFiltersState) => void;
   onReset: () => void;
 }
 
 export default function NoticesFilters({
   filters,
+  locationOptions,
   onChange,
   onReset,
 }: NoticesFiltersProps) {
@@ -43,6 +48,29 @@ export default function NoticesFilters({
           onChange({
             ...filters,
             sex,
+          })
+        }
+      />
+      <SelectSpecies
+        value={filters.species}
+        onChange={species =>
+          onChange({
+            ...filters,
+            species,
+          })
+        }
+      />
+      {/* API повертає тільки ідентифікатор локації без 
+      текстового представлення. Через відсутність ендпоїнта 
+      для локацій фільтрація реалізована по доступному ID
+       з використанням react-select. */}
+      <SelectLocation
+        value={filters.location}
+        options={locationOptions}
+        onChange={location =>
+          onChange({
+            ...filters,
+            location,
           })
         }
       />

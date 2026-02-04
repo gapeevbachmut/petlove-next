@@ -6,3 +6,8 @@ export type NoticesFiltersState = {
   location: string | null;
   sortBy: 'popular' | 'price' | null;
 };
+
+export type LocationOption = {
+  value: string;
+  label: string;
+};

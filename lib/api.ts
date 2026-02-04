@@ -43,8 +43,12 @@ export const getNotices = async (): Promise<Notice[]> => {
   const response = await axios.get<NoticesListResponce>('/notices', {
     params: { limit: 100 },
   });
+  console.log(response.data.results);
+
   return response.data.results;
 };
+
+getNotices();
 
 export const getSingleNotice = async (id: string, token: string) => {
   const response = await axios.get<Notice>(`/notices/${id}`, {
@@ -66,6 +70,13 @@ export const getNoticeCategories = async () => {
 // запит гендер / пол
 export const getNoticeSex = async () => {
   const response = await axios.get<string[]>('/notices/sex');
+
+  return response.data;
+};
+
+// запит за типом
+export const getNoticeSpecies = async () => {
+  const response = await axios.get<string[]>('/notices/species');
 
   return response.data;
 };

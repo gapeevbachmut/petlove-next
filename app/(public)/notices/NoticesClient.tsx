@@ -68,7 +68,8 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import Pagination from '@/components/Pagination/Pagination';
 import NoticesFilters from '@/components/NoticesFilters/NoticesFilters';
-import { type NoticesFiltersState } from '@/types/types';
+import { LocationOption, type NoticesFiltersState } from '@/types/types';
+import { useMemo } from 'react'; // це для SelectLocation
 
 export default function NoticesClient() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -91,6 +92,20 @@ export default function NoticesClient() {
     queryFn: getNotices,
     // placeholderData: keepPreviousData,
   });
+
+  ////////////////////////////
+  // це для SelectLocation
+  const locationOptions: LocationOption[] = useMemo(() => {
+    const uniqueLocations = Array.from(
+      new Set(data.map(item => item.location))
+    );
+
+    return uniqueLocations.map(locationId => ({
+      value: locationId,
+      label: locationId,
+    }));
+  }, [data]);
+  /////////////////////////////
 
   const filteredData = data.filter(item => {
     if (
@@ -154,6 +169,7 @@ export default function NoticesClient() {
         <>
           <NoticesFilters
             filters={filters}
+            locationOptions={locationOptions}
             onChange={nextFilters => {
               setCurrentPage(1);
               setFilters(nextFilters);
