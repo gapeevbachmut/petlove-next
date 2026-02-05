@@ -11,6 +11,8 @@ const NoticesItem = ({ item }: Props) => {
         {item.title}
         <Image src={item.imgURL} alt={item.title} width={100} height={100} />
       </Link>
+      <p>Price:{item.price}</p>
+      <p>Popularity: {item.popularity}</p>
     </li>
   );
 };

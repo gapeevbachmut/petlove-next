@@ -5,6 +5,7 @@ import SelectSex from '../SelectSex/SelectSex';
 import SelectSpecies from '../SelectSpecies/SelectSpecies';
 import SelectLocation from '../SelectLocation/SelectLocation';
 import SortRadio from '../SortRadio/SortRadio';
+import Button from '../Button/Button';
 
 interface NoticesFiltersProps {
   filters: NoticesFiltersState;
@@ -84,9 +85,10 @@ export default function NoticesFilters({
       />
       {
         // умова зміни фільтрів
-        <button type="button" onClick={onReset}>
-          Reset
-        </button>
+        // <button type="button" onClick={onReset}>
+        //   Reset
+        // </button>
+        <Button onClick={onReset}>Reset</Button>
       }
     </form>
   );

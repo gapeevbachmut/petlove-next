@@ -140,10 +140,19 @@ export default function NoticesClient() {
   /////////////-----------------
 
   //  сортування
+
   const sortedData = useMemo(() => {
     if (!filters.sortBy) return filteredData;
 
     const sorted = [...filteredData];
+
+    const withPrice = filteredData.filter(
+      item => typeof item.price === 'number'
+    );
+
+    const withoutPrice = filteredData.filter(
+      item => typeof item.price !== 'number'
+    );
 
     switch (filters.sortBy) {
       case 'popular_desc':
@@ -153,10 +162,16 @@ export default function NoticesClient() {
         return sorted.sort((a, b) => a.popularity - b.popularity);
 
       case 'price_asc':
-        return sorted.sort((a, b) => a.price - b.price);
+        return [
+          ...withPrice.sort((a, b) => a.price! - b.price!),
+          ...withoutPrice,
+        ];
 
       case 'price_desc':
-        return sorted.sort((a, b) => b.price - a.price);
+        return [
+          ...withPrice.sort((a, b) => b.price! - a.price!),
+          ...withoutPrice,
+        ];
 
       default:
         return sorted;
