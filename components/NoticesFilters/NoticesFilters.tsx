@@ -1,11 +1,10 @@
 import { LocationOption, type NoticesFiltersState } from '@/types/types';
 import SearchBox from '../SearchBox/SearchBox';
-// import Select from 'react-select';
-// import { useState } from 'react';
 import SelectCategory from '../SelectCategory/SelectCategory';
 import SelectSex from '../SelectSex/SelectSex';
 import SelectSpecies from '../SelectSpecies/SelectSpecies';
 import SelectLocation from '../SelectLocation/SelectLocation';
+import SortRadio from '../SortRadio/SortRadio';
 
 interface NoticesFiltersProps {
   filters: NoticesFiltersState;
@@ -71,6 +70,15 @@ export default function NoticesFilters({
           onChange({
             ...filters,
             location,
+          })
+        }
+      />
+      <SortRadio
+        value={filters.sortBy}
+        onChange={sortBy =>
+          onChange({
+            ...filters,
+            sortBy,
           })
         }
       />

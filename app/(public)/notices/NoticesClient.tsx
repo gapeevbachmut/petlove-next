@@ -107,41 +107,74 @@ export default function NoticesClient() {
   }, [data]);
   /////////////////////////////
 
-  const filteredData = data.filter(item => {
-    if (
-      filters.search &&
-      !item.title.toLowerCase().includes(filters.search.toLowerCase())
-    ) {
-      return false;
-    }
+  // фільтрація
+  const filteredData = useMemo(() => {
+    return data.filter(item => {
+      if (
+        filters.search &&
+        !item.title.toLowerCase().includes(filters.search.toLowerCase())
+      ) {
+        return false;
+      }
 
-    if (filters.category && item.category !== filters.category) {
-      return false;
-    }
+      if (filters.category && item.category !== filters.category) {
+        return false;
+      }
 
-    if (filters.sex && item.sex !== filters.sex) {
-      return false;
-    }
+      if (filters.sex && item.sex !== filters.sex) {
+        return false;
+      }
 
-    if (filters.species && item.species !== filters.species) {
-      return false;
-    }
+      if (filters.species && item.species !== filters.species) {
+        return false;
+      }
 
-    if (filters.location && item.location !== filters.location) {
-      return false;
-    }
+      if (filters.location && item.location !== filters.location) {
+        return false;
+      }
 
-    return true;
-  });
+      return true;
+    });
+  }, [data, filters]);
 
   /////////////-----------------
+
+  //  сортування
+  const sortedData = useMemo(() => {
+    if (!filters.sortBy) return filteredData;
+
+    const sorted = [...filteredData];
+
+    switch (filters.sortBy) {
+      case 'popular_desc':
+        return sorted.sort((a, b) => b.popularity - a.popularity);
+
+      case 'popular_asc':
+        return sorted.sort((a, b) => a.popularity - b.popularity);
+
+      case 'price_asc':
+        return sorted.sort((a, b) => a.price - b.price);
+
+      case 'price_desc':
+        return sorted.sort((a, b) => b.price - a.price);
+
+      default:
+        return sorted;
+    }
+  }, [filteredData, filters.sortBy]);
+
+  /////////////--------------------------
+
+  //пагінація
   const ITEMS_PER_PAGE = 6;
-  const pageCount = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
+  const pageCount = Math.ceil(sortedData.length / ITEMS_PER_PAGE);
 
   const start = (currentPage - 1) * ITEMS_PER_PAGE;
   const end = start + ITEMS_PER_PAGE;
 
-  const paginatedResults = filteredData?.slice(start, end) ?? [];
+  const paginatedResults = sortedData?.slice(start, end) ?? [];
+
+  ///////////-------------------------
 
   const handlePageChange = ({ selected }: { selected: number }) => {
     setCurrentPage(selected + 1);
