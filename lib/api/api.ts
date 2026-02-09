@@ -1,5 +1,9 @@
 //  тут буде запит на бек  https://petlove.b.goit.study/api
 
+import axios, { AxiosError } from 'axios';
+
+export type ApiError = AxiosError<{ error: string }>; // можлива помилка запиту
+
 // ----------------------------   NEWS
 
 import {
@@ -9,7 +13,7 @@ import {
   Notice,
   NoticesListResponce,
 } from '@/types/api-types';
-import axios from 'axios';
+import { NextResponse } from 'next/server';
 
 axios.defaults.baseURL = 'https://petlove.b.goit.study/api';
 // axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
@@ -43,12 +47,10 @@ export const getNotices = async (): Promise<Notice[]> => {
   const response = await axios.get<NoticesListResponce>('/notices', {
     params: { limit: 100 },
   });
-  console.log(response.data.results);
+  // console.log(response.data.results);
 
   return response.data.results;
 };
-
-getNotices();
 
 export const getSingleNotice = async (id: string, token: string) => {
   const response = await axios.get<Notice>(`/notices/${id}`, {

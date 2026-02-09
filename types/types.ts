@@ -19,3 +19,20 @@ export type SortBy =
   | 'price_asc'
   | 'price_desc'
   | null;
+
+// ------------------------------------
+
+// Тип стану авторизації
+export type User = {
+  _id: string;
+  name: string;
+  email: string;
+  avatar?: string;
+};
+
+export interface AuthState {
+  user: User | null;
+  token: string | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+}

@@ -1,5 +1,5 @@
 import FriendsList from '@/components/FriendsList/FriendsList';
-import { getFriends } from '@/lib/api';
+import { getFriends } from '@/lib/api/api';
 
 export default async function Friends() {
   const friends = await getFriends();

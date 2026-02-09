@@ -2,7 +2,7 @@
 
 //  для авторизоаних !!!!
 
-import { getSingleNotice } from '@/lib/api';
+import { getSingleNotice } from '@/lib/api/api';
 
 type Props = {
   params: Promise<{ id: string; token: string }>;

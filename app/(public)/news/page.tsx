@@ -1,14 +1,24 @@
-import NewsList from '@/components/NewsList/NewsList';
-import { getNews } from '@/lib/api';
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query';
 import NewsClient from './NewsClient';
+import { getNews } from '@/lib/api/api';
 
 export default async function News() {
-  // const responce = await getNews();
-  // console.log('news', responce);
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['news', { currentPage: 1, search: '' }],
+    queryFn: () => getNews(1, ''),
+  });
 
   return (
     <div>
-      <NewsClient />
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <NewsClient />
+      </HydrationBoundary>
     </div>
   );
 }

@@ -6,7 +6,7 @@ import Button from '../Button/Button';
 const AuthNavigation = () => {
   const router = useRouter();
   const handleLogout = () => {
-    router.push('/login');
+    router.push('/');
   };
   return (
     <>
@@ -27,7 +27,7 @@ const AuthNavigation = () => {
       <nav aria-label="User Navigation">
         <ul className={css.authNavigation}>
           <li>
-            <Link href="/prifile" className={css.authLink}>
+            <Link href="/profile" className={css.authLink}>
               Profile
             </Link>
           </li>

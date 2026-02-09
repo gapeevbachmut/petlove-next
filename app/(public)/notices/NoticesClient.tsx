@@ -63,7 +63,7 @@
 
 import Loading from '@/app/loading';
 import NoticesList from '@/components/NoticesList/NoticesList';
-import { getNotices } from '@/lib/api';
+import { getNotices } from '@/lib/api/api';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import Pagination from '@/components/Pagination/Pagination';
@@ -90,6 +90,7 @@ export default function NoticesClient() {
   } = useQuery({
     queryKey: ['notices'],
     queryFn: getNotices,
+    // refetchOnMount: false,
     // placeholderData: keepPreviousData,
   });
 

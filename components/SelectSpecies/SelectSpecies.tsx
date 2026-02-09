@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import SelectField from '@/components/SelectField/SelectField';
-import { getNoticeSpecies } from '@/lib/api';
+import { getNoticeSpecies } from '@/lib/api/api';
 
 interface SelectSpeciesProps {
   value: string | null;
