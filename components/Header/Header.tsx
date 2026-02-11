@@ -5,10 +5,18 @@ import Image from 'next/image';
 import css from './Header.module.css';
 import Link from 'next/link';
 import AuthNavigation from '../AuthNavigation/AuthNavigation';
+import clsx from 'clsx';
+import { usePathname } from 'next/navigation';
 
 const Header = () => {
+  const pathname = usePathname();
+
+  const isHomePage = pathname === '/';
   return (
-    <header className={css.header}>
+    <header
+      className={` containerGlobal
+        ${clsx(css.header, isHomePage ? css.headerHome : css.headerInner)}`}
+    >
       <Link href="/" aria-label="Main">
         <Image
           src="/images/logo_petLove.png"

@@ -1,8 +1,47 @@
-// components/AuthProvider/AuthProvider.tsx
+// // components/AuthProvider/AuthProvider.tsx
+
+// 'use client';
+
+// import { checkSession, getMe } from '@/lib/api/api';
+// import { useAuthStore } from '@/stores/zustand/authStore';
+// import { useEffect } from 'react';
+
+// type Props = {
+//   children: React.ReactNode;
+// };
+
+// const AuthProvider = ({ children }: Props) => {
+//   const setUser = useAuthStore(state => state.setUser);
+//   const clearIsAuthenticated = useAuthStore(
+//     state => state.clearIsAuthenticated
+//   );
+
+//   useEffect(() => {
+//     const fetchUser = async () => {
+//       // Перевіряємо сесію
+//       const isAuthenticated = await checkSession();
+//       if (isAuthenticated) {
+//         // Якщо сесія валідна — отримуємо користувача
+//         const user = await getMe();
+//         if (user) setUser(user);
+//       } else {
+//         // Якщо сесія невалідна — чистимо стан
+//         clearIsAuthenticated();
+//       }
+//     };
+//     fetchUser();
+//   }, [setUser, clearIsAuthenticated]);
+
+//   return children;
+// };
+
+// export default AuthProvider;
+
+//  -------------   Повністю прибираємо checkSession.
 
 'use client';
 
-import { checkSession, getMe } from '@/lib/api/api';
+import { getMe } from '@/lib/api/api';
 import { useAuthStore } from '@/stores/zustand/authStore';
 import { useEffect } from 'react';
 
@@ -18,17 +57,19 @@ const AuthProvider = ({ children }: Props) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      // Перевіряємо сесію
-      const isAuthenticated = await checkSession();
-      if (isAuthenticated) {
-        // Якщо сесія валідна — отримуємо користувача
+      try {
         const user = await getMe();
-        if (user) setUser(user);
-      } else {
-        // Якщо сесія невалідна — чистимо стан
+
+        if (user) {
+          setUser(user);
+        } else {
+          clearIsAuthenticated();
+        }
+      } catch {
         clearIsAuthenticated();
       }
     };
+
     fetchUser();
   }, [setUser, clearIsAuthenticated]);
 

@@ -28,8 +28,8 @@ const nextServer = axios.create({
 });
 
 export const internalApi = axios.create({
-  // baseURL: 'http://localhost:3000/api',
-  baseURL: '/api',
+  baseURL: 'http://localhost:3000/api',
+  // baseURL: '/api',
 
   withCredentials: true,
 });
@@ -70,12 +70,8 @@ export const getNotices = async (): Promise<Notice[]> => {
   return response.data.results;
 };
 
-export const getSingleNotice = async (id: string, token: string) => {
-  const response = await nextServer.get<Notice>(`/notices/${id}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const getSingleNotice = async (id: string) => {
+  const response = await nextServer.get<Notice>(`/notices/${id}`, {});
   return response.data;
 };
 
@@ -137,6 +133,16 @@ export const getMe = async () => {
   const { data } = await internalApi.get<User>('/auth/me');
   return data;
 };
+
+// ---    or
+// export const getMe = async () => {
+//   try {
+//     const res = await internalApi.get<User>('/auth/me');
+//     return res.data;
+//   } catch {
+//     return null;
+//   }
+// };
 
 // ---------------------------------   logout
 

@@ -1,14 +1,14 @@
 // app/api/auth/me/route.ts
 
 import { NextResponse } from 'next/server';
-import { api, ApiError } from '../../api/api';
+import { api, ApiError } from '../../api';
 import { cookies } from 'next/headers';
 
 export async function GET() {
   const cookieStore = await cookies();
 
   try {
-    const { data } = await api.get('/auth/me', {
+    const { data } = await api.get('users/current', {
       headers: {
         Cookie: cookieStore.toString(),
       },

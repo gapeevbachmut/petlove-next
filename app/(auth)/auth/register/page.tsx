@@ -1,6 +1,6 @@
 'use client';
 
-import { ApiError } from '@/app/api/api/api';
+import { ApiError } from '@/app/api/api';
 import { register } from '@/lib/api/api';
 import { useAuthStore } from '@/stores/zustand/authStore';
 import { RegisterRequest } from '@/types/api-types';
@@ -44,7 +44,7 @@ export default function Registration() {
       <form action={handleSubmit}>
         <label>
           Username
-          <input type="text" name="userName" required />
+          <input type="text" name="name" required />
         </label>
         <label>
           Email

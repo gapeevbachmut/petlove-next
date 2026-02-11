@@ -2,12 +2,12 @@
 
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import { api } from '../../api/api';
+import { api } from '../../api';
 
 export async function POST() {
   // Передаємо поточні cookie до API
   const cookieStore = await cookies();
-  await api.post('auth/logout', {
+  await api.post('users/signout', {
     headers: {
       Cookie: cookieStore.toString(),
     },

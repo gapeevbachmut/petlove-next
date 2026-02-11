@@ -7,6 +7,14 @@
     border-block-end: 1px solid #ccc;
 }
 
+.headerHome {
+    background-color: bisque;
+}
+
+.headerInner {
+    background-color: darkgrey;
+}
+
 .navigation {
     display: flex;
     align-items: center;

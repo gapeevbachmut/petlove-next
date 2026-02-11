@@ -2,7 +2,7 @@
 
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import { api } from '../../api/api';
+import { api } from '../../api';
 import { parse } from 'cookie';
 
 export async function GET() {
@@ -21,7 +21,7 @@ export async function GET() {
   // Якщо accessToken немає — перевіряємо refreshToken
   if (refreshToken) {
     // Виконуємо запит до API, передаючи всі cookie у заголовку
-    const apiRes = await api.get('auth/session', {
+    const apiRes = await api.get('users/current', {
       headers: {
         Cookie: cookieStore.toString(), // перетворюємо cookie у рядок
       },

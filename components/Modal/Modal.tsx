@@ -22,10 +22,12 @@ export default function Modal({ onClose, children }: ModalProps) {
     };
     document.addEventListener('keydown', handleKeyDown);
     document.body.style.overflow = 'hidden'; // Заборона прокрутки фону
+    document.documentElement.style.overflow = 'hidden';
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = ''; // повертаю прокрутку фону
+      document.documentElement.style.overflow = '';
     };
   }, [onClose]);
 

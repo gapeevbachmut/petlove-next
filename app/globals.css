@@ -47,3 +47,46 @@ ul {
     color-scheme: dark;
   }
 }
+
+/* //   -------------------------------------------   // */
+
+/* Styles for Mobile devices */
+.containerGlobal {
+  border: 2px double blue;
+  min-width: 320px;
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Mobile */
+@media screen and (min-width: 320px) and (max-width: 374px) {
+  .containerGlobal {
+    width: 100%;
+  }
+}
+
+
+/*  Tablet */
+@media screen and (min-width: 768px) {
+  .containerGlobal {
+    max-width: 768px;
+    width: 768px;
+  }
+}
+
+/* Desktop  */
+@media screen and (min-width: 1200px) {
+  .containerGlobal {
+    max-width: 1200px;
+    width: 1200px;
+  }
+}
+
+/* Desktop 2 */
+@media screen and (min-width: 1440px) {
+  .containerGlobal {
+    max-width: 1440px;
+    width: 1440px;
+  }
+}
