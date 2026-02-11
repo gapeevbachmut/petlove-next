@@ -64,7 +64,7 @@ export default function NoticesFilters({
       текстового представлення. Через відсутність ендпоїнта 
       для локацій фільтрація реалізована по доступному ID
        з використанням react-select. */}
-      <SelectLocation
+      {/* <SelectLocation
         value={filters.location}
         options={locationOptions}
         onChange={location =>
@@ -73,7 +73,7 @@ export default function NoticesFilters({
             location,
           })
         }
-      />
+      /> */}
       <SortRadio
         value={filters.sortBy}
         onChange={sortBy =>

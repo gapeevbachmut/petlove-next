@@ -1,6 +1,6 @@
 // app/notices/[id]/page.tsx
 
-//  для авторизоаних !!!!
+//  для авторизоаних !!!! -
 
 import { getSingleNotice } from '@/lib/api/api';
 

@@ -54,3 +54,30 @@ export type Friend = {
   address: string;
   workDays: WorkDay[];
 };
+
+// --------------------------------------   register / login  /  ...
+
+export type RegisterRequest = {
+  name: string;
+  email: string;
+  password: string;
+};
+
+export type LoginRequest = {
+  email: string;
+  password: string;
+};
+
+export type User = {
+  _id: string;
+  email: string;
+  name?: string;
+  avatar?: string;
+  phone?: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+// noticesViewed []
+// noticesFavorites []
+//  pets []
+//

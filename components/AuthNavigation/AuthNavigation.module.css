@@ -1,6 +1,15 @@
+.navContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .authNavigation {
     display: flex;
+    margin-top: 20px;
+    gap: 10px;
 }
+
 
 .authLink {
     padding: 15px 35px;
