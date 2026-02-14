@@ -111,8 +111,20 @@ export const register = async (data: RegisterRequest) => {
   return res.data;
 };
 
+// export const login = async (data: LoginRequest) => {
+//   const res = await internalApi.post<User>('/auth/login', data);
+//   return res.data;
+// };
+
+//  через проблеми з cookie переробив без серверного обробника !!!!!
+
 export const login = async (data: LoginRequest) => {
-  const res = await internalApi.post<User>('/auth/login', data);
+  const res = await axios.post(
+    'https://petlove.b.goit.study/api/users/signin',
+    data,
+    { withCredentials: true }
+  );
+
   return res.data;
 };
 
@@ -129,20 +141,17 @@ export const checkSession = async () => {
 
 // -------------------------------     Отримання об`єкта користувача
 
+// ---    це теж не працює через куукі та серверний обробник - роблю напряму
 export const getMe = async () => {
-  const { data } = await internalApi.get<User>('/auth/me');
+  //   const { data } = await internalApi.get<User>('/auth/me');
+  const { data } = await axios.get(
+    'https://petlove.b.goit.study/api/users/current',
+    {
+      withCredentials: true,
+    }
+  );
   return data;
 };
-
-// ---    or
-// export const getMe = async () => {
-//   try {
-//     const res = await internalApi.get<User>('/auth/me');
-//     return res.data;
-//   } catch {
-//     return null;
-//   }
-// };
 
 // ---------------------------------   logout
 

@@ -31,11 +31,26 @@ export const useAuthStore = create<AuthStore>()(
       partialize: state => ({
         /*тут описую те що повертається*/
         user: state.user,
+        isAuthenticated: state.isAuthenticated,
       }),
     }
   )
 );
 
+//----------------------------------------------------------------------
+
+// export const useAuthStore = create<AuthStore>()(set => ({
+//   isAuthenticated: false,
+//   user: null,
+//   setUser: (user: User) => {
+//     set(() => ({ user, isAuthenticated: true }));
+//   },
+//   clearIsAuthenticated: () => {
+//     set(() => ({ user: null, isAuthenticated: false }));
+//   },
+// }));
+
+//----------------------------------------------------------------------
 /*
 useAuthStore - це хук, який ми будемо викликати у компонентах.
 isUser: false - початкове значення .
