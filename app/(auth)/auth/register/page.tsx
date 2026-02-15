@@ -1,6 +1,6 @@
 'use client';
 
-import { ApiError } from '@/app/api/api';
+import { ApiError } from '@/lib/api/api';
 import { register } from '@/lib/api/api';
 import { useAuthStore } from '@/stores/zustand/authStore';
 import { RegisterRequest } from '@/types/api-types';

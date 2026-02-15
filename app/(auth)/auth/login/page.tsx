@@ -2,8 +2,7 @@
 
 'use client';
 
-import { ApiError } from '@/app/api/api';
-import { login } from '@/lib/api/api';
+import { ApiError, login } from '@/lib/api/api';
 import { useAuthStore } from '@/stores/zustand/authStore';
 import { LoginRequest } from '@/types/api-types';
 import { useRouter } from 'next/navigation';
