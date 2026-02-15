@@ -24,22 +24,27 @@ export default function Profile() {
     }
   };
 
-  // console.log('user', user);
+  const avatarSrc =
+    user?.avatar && user.avatar.trim() !== ''
+      ? user.avatar
+      : 'https://res.cloudinary.com/dyounr2tf/image/upload/v1771165302/avatar-WHO_h5eh4t.png';
+
+  console.log('user', user);
 
   return (
     <>
       <h1>Page PROFILE</h1>
       <p>user: {user?.name}</p>
       <p>email: {user?.email}</p>
-      {user?.avatar && (
-        <Image
-          src={user.avatar}
-          alt="User avatar"
-          width={300}
-          height={300}
-          // className={css.avatar}
-        />
-      )}
+      <p>phone: {user?.phone}</p>
+
+      <Image
+        src={avatarSrc}
+        alt="User avatar"
+        width={300}
+        height={300}
+        // className={css.avatar}
+      />
 
       <Button variant="primary" onClick={handleModalEditUser}>
         Edit profile
