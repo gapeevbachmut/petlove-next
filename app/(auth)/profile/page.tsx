@@ -45,8 +45,8 @@ export default function Profile() {
         Edit profile
       </Button>
       {isModalEditUser && (
-        <Modal onClose={() => setIsModalEditUser(false)}>
-          <ModalEditUser />
+        <Modal onClose={closeModal}>
+          <ModalEditUser onClose={closeModal} />
         </Modal>
       )}
     </>

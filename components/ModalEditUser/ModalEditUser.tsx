@@ -8,13 +8,16 @@ import { getMe, updateMe } from '@/lib/api/api';
 import { useAuthStore } from '@/stores/zustand/authStore';
 import Button from '../Button/Button';
 
-export default function ModalEditUser() {
+type Props = {
+  onClose: () => void;
+};
+
+export default function ModalEditUser({ onClose }: Props) {
   const setUser = useAuthStore(state => state.setUser);
   const currentUser = useAuthStore(state => state.user);
 
-  const [userName, setUserName] = useState('');
-  //   const [avatarUrl, setAvatarUrl] = useState('');
-  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [userName, setUserName] = useState(currentUser?.name ?? '');
+  const [avatarUrl, setAvatarUrl] = useState(currentUser?.avatar ?? '');
 
   const handleSaveUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -22,15 +25,16 @@ export default function ModalEditUser() {
     try {
       const updatedUser = await updateMe({
         name: userName,
-        avatar: imageFile ?? undefined,
+        avatar: avatarUrl,
       });
-      console.log('imageFile', imageFile);
-      console.log('UPDATED USER:', updatedUser);
+      //   console.log('UPDATED USER:', updatedUser);
       //  ОНОВЛЮЄМО ZUSTAND
       setUser({
         ...updatedUser,
         token: currentUser?.token,
       });
+
+      onClose();
     } catch (error) {
       console.error('Update error:', error);
     }
@@ -45,8 +49,8 @@ export default function ModalEditUser() {
       <div>
         <h1>Edit profile</h1>
         <AvatarPicker
-          profileAvatarUrl={currentUser?.avatar}
-          onChangeAvatar={setImageFile}
+          profileAvatarUrl={avatarUrl}
+          onChangeAvatar={setAvatarUrl}
         />
         <form onSubmit={handleSaveUser}>
           <input type="text" value={userName} onChange={handleChange} />

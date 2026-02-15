@@ -123,18 +123,8 @@ export const logout = () => {
 
 //  UPDATE  USER (edit  profile)
 
-export const updateMe = async (data: { name?: string; avatar?: File }) => {
-  const formData = new FormData();
-
-  if (data.name) {
-    formData.append('name', data.name);
-  }
-
-  if (data.avatar) {
-    formData.append('avatar', data.avatar);
-  }
-
-  const res = await apiClient.patch<User>('/users/current/edit', formData);
+export const updateMe = async (data: { name?: string; avatar?: string }) => {
+  const res = await apiClient.patch<User>('/users/current/edit', data);
 
   return res.data;
 };

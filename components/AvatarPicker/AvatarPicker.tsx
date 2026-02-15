@@ -8,8 +8,7 @@ import Image from 'next/image';
 import Button from '../Button/Button';
 
 type Props = {
-  //   avatar?: string;
-  onChangeAvatar: (file: File | null) => void;
+  onChangeAvatar: (url: string) => void;
   profileAvatarUrl?: string;
 };
 
@@ -18,40 +17,21 @@ const AvatarPicker = ({ onChangeAvatar, profileAvatarUrl }: Props) => {
   const [previewUrl, setPreviewUrl] = useState('');
 
   useEffect(() => {
-    if (profileAvatarUrl) {
-      setPreviewUrl(profileAvatarUrl);
-    }
+    setPreviewUrl(profileAvatarUrl ?? '');
+    // if (profileAvatarUrl) {
+    //   setPreviewUrl(profileAvatarUrl ?? '');
+    // }
   }, [profileAvatarUrl]);
 
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    console.log('file', file);
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const url = e.target.value;
+    setPreviewUrl(url);
+    onChangeAvatar(url);
     setError('');
-
-    if (file) {
-      // Перевіряємо тип файлу
-      if (!file.type.startsWith('image/')) {
-        setError('Only images');
-        return;
-      }
-
-      // Перевіряємо розмір файлу (максимум 5MB)
-      if (file.size > 5 * 1024 * 1024) {
-        setError('Max file size 5MB');
-        return;
-      }
-
-      onChangeAvatar(file); // передаємо файл у батьківський компонент
-
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewUrl(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
   };
+
   const handleRemove = () => {
-    onChangeAvatar(null); // очищуємо батьківський стан
+    onChangeAvatar(''); // очищуємо
     setPreviewUrl('');
   };
 
@@ -61,7 +41,7 @@ const AvatarPicker = ({ onChangeAvatar, profileAvatarUrl }: Props) => {
         {previewUrl && (
           <Image
             src={previewUrl}
-            alt="Preview"
+            alt="Avatar preview"
             width={300}
             height={300}
             className={css.avatar}
@@ -70,12 +50,13 @@ const AvatarPicker = ({ onChangeAvatar, profileAvatarUrl }: Props) => {
         <label
           className={previewUrl ? `${css.wrapper} ${css.reload}` : css.wrapper}
         >
-          📷 Choose photo
+          Paste avatar URL
           <input
-            type="file"
-            accept="image/*"
+            type="text"
+            placeholder="Paste avatar URL"
+            value={previewUrl}
             onChange={handleFileChange}
-            className={css.input}
+            className={css.inputNo}
           />
         </label>
         {previewUrl && (
