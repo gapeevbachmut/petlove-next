@@ -74,6 +74,7 @@ export type User = {
   name?: string;
   avatar?: string;
   phone?: string;
+  token?: string;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -81,3 +82,8 @@ export type User = {
 // noticesFavorites []
 //  pets []
 //
+
+export type UpdateUserRequest = {
+  name?: string;
+  avatar?: string;
+};

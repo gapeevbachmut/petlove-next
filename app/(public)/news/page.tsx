@@ -4,14 +4,14 @@ import {
   QueryClient,
 } from '@tanstack/react-query';
 import NewsClient from './NewsClient';
-import { fetchNewsServer } from '@/lib/api/api';
+import { fetchNews } from '@/lib/api/api';
 
 export default async function News() {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
     queryKey: ['news', { currentPage: 1, search: '' }],
-    queryFn: () => fetchNewsServer(1, ''),
+    queryFn: () => fetchNews(1, ''),
   });
 
   return (

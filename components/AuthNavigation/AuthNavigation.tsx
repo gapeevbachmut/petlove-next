@@ -22,7 +22,7 @@ const AuthNavigation = () => {
     // Чистимо глобальний стан
     clearIsAuthenticated();
     // Виконуємо навігацію на сторінку авторизації
-    router.push('/login');
+    router.push('/');
   };
 
   // Якщо є сесія - відображаємо кнопку Logout та інформацію про користувача

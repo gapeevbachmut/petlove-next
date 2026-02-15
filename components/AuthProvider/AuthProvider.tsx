@@ -59,20 +59,19 @@ const AuthProvider = ({ children }: Props) => {
     const fetchUser = async () => {
       try {
         const user = await getMe();
-
-        if (user) {
-          setUser(user);
-        } else {
-          clearIsAuthenticated();
-        }
+        setUser({
+          ...user,
+          token: useAuthStore.getState().user?.token!,
+        });
       } catch {
         clearIsAuthenticated();
       }
     };
 
-    fetchUser();
+    if (useAuthStore.getState().user?.token) {
+      fetchUser();
+    }
   }, []);
-  //   }, [setUser, clearIsAuthenticated]);
 
   return children;
 };

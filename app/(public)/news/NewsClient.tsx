@@ -2,7 +2,7 @@
 
 import Loading from '@/app/loading';
 import NewsList from '@/components/NewsList/NewsList';
-import { fetchNewsServer } from '@/lib/api/api';
+import { fetchNews } from '@/lib/api/api';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import ErrorMessage from '@/app/error';
@@ -15,7 +15,7 @@ export default function NewsClient() {
 
   const { data, isLoading, isError, error, isSuccess, refetch } = useQuery({
     queryKey: ['news', { currentPage, search: searchQuery }],
-    queryFn: () => fetchNewsServer(currentPage, searchQuery),
+    queryFn: () => fetchNews(currentPage, searchQuery),
     refetchOnMount: false, // не треба робити повторний запит!!!
     placeholderData: keepPreviousData,
   });

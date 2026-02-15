@@ -24,7 +24,11 @@ export default function LogIn() {
       // Виконуємо редірект або відображаємо помилку
       if (res) {
         // Записуємо користувача у глобальний стан
-        setUser(res);
+        // setUser(res);
+        setUser({
+          ...res,
+          token: res.token, // зміни пов'язані з видаленням серверних обробників запитів
+        });
         router.push('/profile');
       } else {
         setError('Invalid email or password');
