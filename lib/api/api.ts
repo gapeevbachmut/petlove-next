@@ -122,10 +122,34 @@ export const logout = () => {
 };
 
 //  UPDATE  USER (edit  profile)
-export const updateMe = async (payload: UpdateUserRequest) => {
-  const res = await apiClient.put<User>('/auth/me', payload);
+
+export const updateMe = async (data: { name?: string; avatar?: File }) => {
+  const formData = new FormData();
+
+  if (data.name) {
+    formData.append('name', data.name);
+  }
+
+  if (data.avatar) {
+    formData.append('avatar', data.avatar);
+  }
+
+  const res = await apiClient.patch<User>('/users/current/edit', formData);
+
   return res.data;
 };
+
+// export const updateMe = async (payload: UpdateUserRequest) => {
+//   const res = await apiClient.put<User>('/users/current/edit', payload);
+//   return res.data;
+// };
+
+// export const uploadImage = async (file: File): Promise<string> => {
+//   const formData = new FormData();
+//   formData.append('file', file);
+//   const { data } = await apiClient.post('/users/current/edit', formData);
+//   return data.url;
+// };
 
 //  old version
 /*

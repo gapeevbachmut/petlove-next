@@ -7,23 +7,23 @@ import css from './AvatarPicker.module.css';
 import Image from 'next/image';
 import Button from '../Button/Button';
 
-type Props = { avatar?: string };
+type Props = {
+  //   avatar?: string;
+  onChangeAvatar: (file: File | null) => void;
+  profileAvatarUrl?: string;
+};
 
-const AvatarPicker = ({ avatar }: Props) => {
+const AvatarPicker = ({ onChangeAvatar, profileAvatarUrl }: Props) => {
   const [error, setError] = useState('');
   const [previewUrl, setPreviewUrl] = useState('');
 
   useEffect(() => {
-    if (avatar) {
-      setPreviewUrl(avatar);
+    if (profileAvatarUrl) {
+      setPreviewUrl(profileAvatarUrl);
     }
-  }, [avatar]);
+  }, [profileAvatarUrl]);
 
-  const handleRemove = () => {
-    setPreviewUrl('');
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     console.log('file', file);
     setError('');
@@ -41,12 +41,18 @@ const AvatarPicker = ({ avatar }: Props) => {
         return;
       }
 
+      onChangeAvatar(file); // передаємо файл у батьківський компонент
+
       const reader = new FileReader();
       reader.onloadend = () => {
         setPreviewUrl(reader.result as string);
       };
       reader.readAsDataURL(file);
     }
+  };
+  const handleRemove = () => {
+    onChangeAvatar(null); // очищуємо батьківський стан
+    setPreviewUrl('');
   };
 
   return (
