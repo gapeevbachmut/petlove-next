@@ -1,7 +1,6 @@
-// import Image from "next/image";
 'use client';
 
-import Button from '@/components/Button/Button';
+import clsx from 'clsx';
 
 export default function Main() {
   return (

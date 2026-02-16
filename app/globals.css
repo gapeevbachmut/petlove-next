@@ -52,7 +52,7 @@ ul {
 
 /* Styles for Mobile devices */
 .containerGlobal {
-  border: 2px double blue;
+  /* border: 2px double blue; */
   min-width: 320px;
   max-width: 375px;
   margin: 0 auto;
@@ -71,15 +71,15 @@ ul {
 @media screen and (min-width: 768px) {
   .containerGlobal {
     max-width: 768px;
-    width: 768px;
+    width: 704px;
   }
 }
 
 /* Desktop  */
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1280px) {
   .containerGlobal {
-    max-width: 1200px;
-    width: 1200px;
+    max-width: 1280px;
+    width: 1216px;
   }
 }
 
@@ -87,6 +87,6 @@ ul {
 @media screen and (min-width: 1440px) {
   .containerGlobal {
     max-width: 1440px;
-    width: 1440px;
+    width: 1376px;
   }
 }

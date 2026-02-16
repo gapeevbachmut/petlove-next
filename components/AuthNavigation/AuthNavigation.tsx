@@ -33,7 +33,11 @@ const AuthNavigation = ({ handleNavigate }: Props) => {
               <Button
                 className={css.authNavBtn}
                 variant="primary"
-                // onClick={() => handleNavigate('/profile')}
+                onClick={() =>
+                  handleNavigate
+                    ? handleNavigate('/auth/profile')
+                    : router.push('/auth/profile')
+                }
               >
                 Profile
               </Button>
@@ -59,7 +63,11 @@ const AuthNavigation = ({ handleNavigate }: Props) => {
               <Button
                 className={css.authNavBtn}
                 variant="primary"
-                // onClick={() => handleNavigate('/auth/login')}
+                onClick={() =>
+                  handleNavigate
+                    ? handleNavigate('/auth/login')
+                    : router.push('/auth/login')
+                }
               >
                 LOG IN
               </Button>
@@ -68,7 +76,11 @@ const AuthNavigation = ({ handleNavigate }: Props) => {
               <Button
                 className={css.authNavBtn}
                 variant="secondary"
-                // onClick={() => handleNavigate('/auth/register')}
+                onClick={() =>
+                  handleNavigate
+                    ? handleNavigate('/auth/register')
+                    : router.push('/auth/register')
+                }
               >
                 Registration
               </Button>
