@@ -1,10 +1,24 @@
 .header {
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     gap: 24px;
     padding: 12px;
     border-block-end: 1px solid #ccc;
+}
+
+/* Desktop navigation visible */
+.headerNavigation {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+/* Burger hidden on desktop */
+.burger {
+    display: none;
+
 }
 
 .headerHome {
@@ -21,4 +35,43 @@
     justify-content: flex-start;
     gap: 12px;
     list-style-type: none;
+}
+
+/* Mobile menu hidden by default */
+.mobileMenu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 220px;
+    height: 100vh;
+    background: white;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    z-index: 1000;
+}
+
+.closeBtn {
+    align-self: flex-end;
+
+}
+
+.mobileNavigation {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    font-size: 20px;
+}
+
+/* 🔥 MOBILE */
+@media (max-width: 767px) {
+    .headerNavigation {
+        display: none;
+    }
+
+    .burger {
+        display: block;
+    }
 }

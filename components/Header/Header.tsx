@@ -6,12 +6,31 @@ import css from './Header.module.css';
 import Link from 'next/link';
 import AuthNavigation from '../AuthNavigation/AuthNavigation';
 import clsx from 'clsx';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import Button from '../Button/Button';
 
 const Header = () => {
   const pathname = usePathname();
-
   const isHomePage = pathname === '/';
+
+  const router = useRouter();
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => setIsMenuOpen(prev => !prev);
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+  const handleNavigate = (path: string) => {
+    setIsMenuOpen(false);
+    router.push(path);
+  };
+
+  // блокуємо скрол
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+  }, [isMenuOpen]);
+
   return (
     <header
       className={` containerGlobal
@@ -25,23 +44,82 @@ const Header = () => {
           height={30}
         />
       </Link>
-      <nav aria-label="Main Navigation">
-        <ul className={css.navigation}>
-          <li>
-            <Link href="/news">News</Link>
-          </li>
-          <li>
-            <Link href="/notices">Find pet</Link>
-          </li>
-          <li>
-            <Link href="/friends">Our friends</Link>
-          </li>
-        </ul>
-      </nav>
-      <div>
-        {/* навігація для гостя  та авторизованого */}
+      {/* Desktop navigation */}
+      <div className={css.headerNavigation}>
+        <nav aria-label="Main Navigation">
+          <ul className={css.navigation}>
+            <li>
+              <Link href="/news">News</Link>
+            </li>
+            <li>
+              <Link href="/notices">Find pet</Link>
+            </li>
+            <li>
+              <Link href="/friends">Our friends</Link>
+            </li>
+          </ul>
+        </nav>
         <AuthNavigation />
       </div>
+
+      {/* Burger button */}
+      <Button
+        className={css.burger}
+        variant="quaternary"
+        onClick={toggleMenu}
+        aria-label="Open menu"
+      >
+        <svg width={30} height={30}>
+          <use href="/images/menu-01.svg"></use>
+        </svg>
+      </Button>
+
+      {/* Mobile menu */}
+      {isMenuOpen && (
+        <div className={css.mobileMenu}>
+          <Button
+            className={css.closeBtn}
+            variant="quaternary"
+            onClick={closeMenu}
+            aria-label="Close menu"
+          >
+            <svg width={30} height={30}>
+              <use href="/images/x.svg"></use>
+            </svg>
+          </Button>
+
+          <nav>
+            <ul className={css.mobileNavigation}>
+              <li>
+                <Button
+                  variant="tertiary"
+                  onClick={() => handleNavigate('/news')}
+                >
+                  News
+                </Button>
+              </li>
+              <li>
+                <Button
+                  variant="tertiary"
+                  onClick={() => handleNavigate('/notices')}
+                >
+                  Find pet
+                </Button>
+              </li>
+              <li>
+                <Button
+                  variant="tertiary"
+                  onClick={() => handleNavigate('/friends')}
+                >
+                  Our friends
+                </Button>
+              </li>
+            </ul>
+          </nav>
+
+          <AuthNavigation />
+        </div>
+      )}
     </header>
   );
 };
