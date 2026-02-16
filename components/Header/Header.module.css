@@ -23,6 +23,7 @@
 
 .headerHome {
     background-color: bisque;
+
 }
 
 .headerInner {
@@ -37,36 +38,10 @@
     list-style-type: none;
 }
 
-/* Mobile menu hidden by default */
-.mobileMenu {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 220px;
-    height: 100vh;
-    background: white;
-    padding: 40px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    z-index: 1000;
-}
 
-.closeBtn {
-    align-self: flex-end;
 
-}
-
-.mobileNavigation {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    font-size: 20px;
-}
-
-/* 🔥 MOBILE */
-@media (max-width: 767px) {
+/*  MOBILE */
+@media (max-width: 1000px) {
     .headerNavigation {
         display: none;
     }

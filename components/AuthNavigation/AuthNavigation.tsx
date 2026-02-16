@@ -5,28 +5,24 @@ import Button from '../Button/Button';
 import { useAuthStore } from '@/stores/zustand/authStore';
 import { logout } from '@/lib/api/api';
 
-const AuthNavigation = () => {
+type Props = {
+  handleNavigate?: (path: string) => void;
+};
+
+const AuthNavigation = ({ handleNavigate }: Props) => {
   const router = useRouter();
 
-  // Отримуємо поточну сесію та юзера
   const { isAuthenticated, user } = useAuthStore();
 
-  // Отримуємо метод очищення глобального стану
   const clearIsAuthenticated = useAuthStore(
     state => state.clearIsAuthenticated
   );
 
   const handleLogout = async () => {
-    // Викликаємо logout
-    await logout();
-    // Чистимо глобальний стан
+    logout();
     clearIsAuthenticated();
-    // Виконуємо навігацію на сторінку авторизації
     router.push('/');
   };
-
-  // Якщо є сесія - відображаємо кнопку Logout та інформацію про користувача
-  // інакше - посилання на логін та реєстрацію
 
   return (
     <div className={css.navContainer}>
@@ -34,12 +30,25 @@ const AuthNavigation = () => {
         <nav aria-label="User Navigation">
           <ul className={css.authNavigation}>
             <li>
-              <Link href="/profile" className={css.authLink}>
+              <Button
+                className={css.authNavBtn}
+                variant="primary"
+                // onClick={() => handleNavigate('/profile')}
+              >
                 Profile
-              </Link>
+              </Button>
+              {/* <Link href="/profile" className={css.authLink}>
+                Profile
+              </Link> */}
             </li>
             <li>
-              <Button onClick={handleLogout}>Logout</Button>
+              <Button
+                variant="secondary"
+                className={css.authNavBtn}
+                onClick={handleLogout}
+              >
+                Logout
+              </Button>
             </li>
           </ul>
         </nav>
@@ -47,14 +56,22 @@ const AuthNavigation = () => {
         <nav aria-label="Auth Navigation">
           <ul className={css.authNavigation}>
             <li>
-              <Link href="/auth/login" className={css.authLink}>
-                Login
-              </Link>
+              <Button
+                className={css.authNavBtn}
+                variant="primary"
+                // onClick={() => handleNavigate('/auth/login')}
+              >
+                LOG IN
+              </Button>
             </li>
             <li>
-              <Link href="/auth/register" className={css.authLink}>
+              <Button
+                className={css.authNavBtn}
+                variant="secondary"
+                // onClick={() => handleNavigate('/auth/register')}
+              >
                 Registration
-              </Link>
+              </Button>
             </li>
           </ul>
         </nav>

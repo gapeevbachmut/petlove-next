@@ -3,6 +3,7 @@
 import css from './Modal.module.css';
 import { createPortal } from 'react-dom';
 import { useEffect, useState, type ReactNode } from 'react';
+import Button from '../Button/Button';
 
 interface ModalProps {
   onClose: () => void;
@@ -47,13 +48,17 @@ export default function Modal({ onClose, children }: ModalProps) {
       aria-modal="true"
     >
       <div className={css.modal}>
-        <button
+        <Button
           className={css.closeButton}
+          variant="quaternary"
           onClick={onClose}
           aria-label="Close modal"
         >
-          &times;
-        </button>
+          <svg width={30} height={30}>
+            <use href="/images/x.svg"></use>
+          </svg>
+        </Button>
+
         {children}
       </div>
     </div>,

@@ -28,3 +28,17 @@
     background-color: #f6b83d;
     color: #fff;
 }
+
+@media (max-width: 1000px) {
+    .authNavigation {
+        flex-wrap: wrap;
+
+    }
+
+    .authNavBtn {
+        width: 178px;
+
+    }
+
+
+}

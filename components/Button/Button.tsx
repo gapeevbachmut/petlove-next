@@ -33,7 +33,7 @@ export default function Button({
         css.baseStyles,
         css[variant],
         disabled && css.disabled,
-        className // 👈 ось це головне
+        className
       )}
     >
       {children}

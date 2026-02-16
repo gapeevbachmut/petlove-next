@@ -9,6 +9,7 @@ import clsx from 'clsx';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Button from '../Button/Button';
+import HeaderMobile from '../HeaderMobile/HeaderMobile';
 
 const Header = () => {
   const pathname = usePathname();
@@ -28,7 +29,18 @@ const Header = () => {
 
   // блокуємо скрол
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    if (isMenuOpen) {
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    };
   }, [isMenuOpen]);
 
   return (
@@ -49,13 +61,28 @@ const Header = () => {
         <nav aria-label="Main Navigation">
           <ul className={css.navigation}>
             <li>
-              <Link href="/news">News</Link>
+              <Button
+                variant="tertiary"
+                onClick={() => handleNavigate('/news')}
+              >
+                News
+              </Button>
             </li>
             <li>
-              <Link href="/notices">Find pet</Link>
+              <Button
+                variant="tertiary"
+                onClick={() => handleNavigate('/notices')}
+              >
+                Find pet
+              </Button>
             </li>
             <li>
-              <Link href="/friends">Our friends</Link>
+              <Button
+                variant="tertiary"
+                onClick={() => handleNavigate('/friends')}
+              >
+                Our friends
+              </Button>{' '}
             </li>
           </ul>
         </nav>
@@ -76,49 +103,7 @@ const Header = () => {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className={css.mobileMenu}>
-          <Button
-            className={css.closeBtn}
-            variant="quaternary"
-            onClick={closeMenu}
-            aria-label="Close menu"
-          >
-            <svg width={30} height={30}>
-              <use href="/images/x.svg"></use>
-            </svg>
-          </Button>
-
-          <nav>
-            <ul className={css.mobileNavigation}>
-              <li>
-                <Button
-                  variant="tertiary"
-                  onClick={() => handleNavigate('/news')}
-                >
-                  News
-                </Button>
-              </li>
-              <li>
-                <Button
-                  variant="tertiary"
-                  onClick={() => handleNavigate('/notices')}
-                >
-                  Find pet
-                </Button>
-              </li>
-              <li>
-                <Button
-                  variant="tertiary"
-                  onClick={() => handleNavigate('/friends')}
-                >
-                  Our friends
-                </Button>
-              </li>
-            </ul>
-          </nav>
-
-          <AuthNavigation />
-        </div>
+        <HeaderMobile closeMenu={closeMenu} handleNavigate={handleNavigate} />
       )}
     </header>
   );
