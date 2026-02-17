@@ -51,12 +51,13 @@ ul {
 /* //   -------------------------------------------   // */
 
 /* Styles for Mobile devices */
+
 .containerGlobal {
   /* border: 2px double blue; */
   min-width: 320px;
   max-width: 375px;
   margin: 0 auto;
-  padding: 0 16px;
+  /* padding: 0 16px; */
 }
 
 /* Mobile */

@@ -49,7 +49,7 @@ const Header = () => {
       className={` containerGlobal
         ${clsx(css.header, isHomePage ? css.headerHome : css.headerInner)}`}
     >
-      {isHomePage && (
+      {isHomePage ? (
         <Link href="/" aria-label="Main">
           <Image
             className={css.logo}
@@ -59,8 +59,7 @@ const Header = () => {
             height={30}
           />
         </Link>
-      )}
-      {!isHomePage && (
+      ) : (
         <Link href="/" aria-label="Main">
           <Image
             className={css.logo}

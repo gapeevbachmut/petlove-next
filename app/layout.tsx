@@ -6,6 +6,7 @@ import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
 import AuthProvider from '@/components/AuthProvider/AuthProvider';
+import clsx from 'clsx';
 
 const roboto = Roboto({
   variable: '--font-roboto',
@@ -36,7 +37,7 @@ export default function RootLayout({
           <TanStackProvider>
             <AuthProvider>
               <Header />
-              <main className={css.gluedFooterMain}>
+              <main className={`containerGlobal ${clsx(css.gluedFooterMain)}`}>
                 {children}
                 {modal}
               </main>

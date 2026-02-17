@@ -1,9 +1,9 @@
-import Link from 'next/link';
 import css from './AuthNavigation.module.css';
 import { useRouter } from 'next/navigation';
 import Button from '../Button/Button';
 import { useAuthStore } from '@/stores/zustand/authStore';
 import { logout } from '@/lib/api/api';
+import clsx from 'clsx';
 
 type Props = {
   handleNavigate?: (path: string) => void;
@@ -31,24 +31,21 @@ const AuthNavigation = ({ handleNavigate }: Props) => {
           <ul className={css.authNavigation}>
             <li>
               <Button
-                className={css.authNavBtn}
+                className={clsx(css.authNavBtn, css.authNavBtnProfile)}
                 variant="primary"
                 onClick={() =>
                   handleNavigate
-                    ? handleNavigate('/auth/profile')
-                    : router.push('/auth/profile')
+                    ? handleNavigate('/profile')
+                    : router.push('/profile')
                 }
               >
                 Profile
               </Button>
-              {/* <Link href="/profile" className={css.authLink}>
-                Profile
-              </Link> */}
             </li>
             <li>
               <Button
                 variant="secondary"
-                className={css.authNavBtn}
+                className={clsx(css.authNavBtn, css.authNavBtnLogout)}
                 onClick={handleLogout}
               >
                 Logout
