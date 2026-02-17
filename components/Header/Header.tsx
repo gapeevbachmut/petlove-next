@@ -50,7 +50,7 @@ const Header = () => {
         ${clsx(css.header, isHomePage ? css.headerHome : css.headerInner)}`}
     >
       {isHomePage ? (
-        <Link href="/" aria-label="Main">
+        <Link href="/" aria-label="Main" className={css.logoLink}>
           <Image
             className={css.logo}
             src="/images/logo_petLove_white.png"
@@ -60,7 +60,7 @@ const Header = () => {
           />
         </Link>
       ) : (
-        <Link href="/" aria-label="Main">
+        <Link href="/" aria-label="Main" className={css.logoLink}>
           <Image
             className={css.logo}
             src="/images/logo_petLove.png"
@@ -77,6 +77,7 @@ const Header = () => {
           <ul className={css.navigation}>
             <li>
               <Button
+                className={css.desktonNav}
                 variant="tertiary"
                 onClick={() => handleNavigate('/news')}
               >
@@ -85,6 +86,7 @@ const Header = () => {
             </li>
             <li>
               <Button
+                className={css.desktonNav}
                 variant="tertiary"
                 onClick={() => handleNavigate('/notices')}
               >
@@ -93,6 +95,7 @@ const Header = () => {
             </li>
             <li>
               <Button
+                className={css.desktonNav}
                 variant="tertiary"
                 onClick={() => handleNavigate('/friends')}
               >

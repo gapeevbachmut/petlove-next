@@ -88,3 +88,29 @@
     }
 
 }
+
+@media (min-width:1280px) {
+    .textContainer {
+        display: flex;
+        gap: 70px;
+        width: 1216px;
+        padding: 64px;
+        padding-top: 100px;
+
+    }
+
+    .title {
+        margin-top: 0;
+        font-size: 90px;
+    }
+
+    .textBox {
+        flex-direction: column;
+    }
+}
+
+@media (min-width:1440px) {
+    .textContainer {
+        width: 1376px;
+    }
+}

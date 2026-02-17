@@ -22,6 +22,18 @@ export default function Main() {
       <div className={css.imgBox}>
         <picture>
           <source
+            media="(min-width:1440px)"
+            srcSet="https://res.cloudinary.com/dyounr2tf/image/upload/v1771327749/mainImgDesktop_qun8p6.png"
+            width={1376}
+            height={436}
+          />
+          <source
+            media="(min-width:1280px)"
+            srcSet="https://res.cloudinary.com/dyounr2tf/image/upload/v1771327749/mainImgDesktop_qun8p6.png"
+            width={1216}
+            height={384}
+          />
+          <source
             media="(min-width:768px)"
             srcSet="https://res.cloudinary.com/dyounr2tf/image/upload/v1771325883/mainImgTablet_jakqbz.png"
             width={704}
