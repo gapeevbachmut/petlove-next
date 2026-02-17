@@ -8,6 +8,7 @@ import { useState } from 'react';
 import ErrorMessage from '@/app/error';
 import Pagination from '@/components/Pagination/Pagination';
 import SearchBox from '@/components/SearchBox/SearchBox';
+import css from './NewsClient.module.css';
 
 export default function NewsClient() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -32,9 +33,11 @@ export default function NewsClient() {
   };
 
   return (
-    <div>
-      <h1>News</h1>
-      <SearchBox onSubmit={handleSearchChange} />
+    <div className={css.newsContainer}>
+      <div className={css.searchBox}>
+        <h1 className={css.mainTitle}>News</h1>
+        <SearchBox onSubmit={handleSearchChange} />
+      </div>
 
       {isLoading && <Loading />}
       {isError && (

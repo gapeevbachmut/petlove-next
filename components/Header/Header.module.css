@@ -16,6 +16,11 @@
     align-items: center;
 }
 
+.desktonNav:hover,
+.desktonNav:focus {
+    border: 1px solid #f6b83d;
+}
+
 .authBox {
     display: flex;
 }
@@ -33,20 +38,6 @@
     /* padding: 0; */
 }
 
-/* Burger hidden on desktop */
-.burger {
-    display: none;
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    border: 0;
-    padding: 0;
-    white-space: nowrap;
-    clip-path: inset(100%);
-    clip: rect(0 0 0 0);
-    overflow: hidden;
-}
 
 .svgBurger {
     stroke: #fff;
@@ -61,7 +52,7 @@
 }
 
 .headerInner {
-    background-color: darkgrey;
+    background-color: #fff;
 }
 
 .navigation {
@@ -131,6 +122,19 @@
 
 /*   DESKTOP */
 @media (min-width: 1280px) {
+    .burger {
+        display: none;
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        border: 0;
+        padding: 0;
+        white-space: nowrap;
+        clip-path: inset(100%);
+        clip: rect(0 0 0 0);
+        overflow: hidden;
+    }
 
     .headerHome .desktonNav {
         color: #fff;
