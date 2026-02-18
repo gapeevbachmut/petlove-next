@@ -1,0 +1,136 @@
+/* .friendBox {
+    border: solid 1px blue;
+} */
+
+.titlePage {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 100%;
+    letter-spacing: -0.03em;
+    color: #262626;
+    margin-bottom: 40px;
+}
+
+.friendList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.itemContainer {
+    display: flex;
+    gap: 14px;
+    border-radius: 15px;
+    width: 334px;
+    background-color: #fff;
+    padding: 12px 20px 40px;
+}
+
+.imageBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.infoBox {
+    width: 200px;
+}
+
+.time {
+    border-radius: 30px;
+    padding: 8px;
+    width: 88px;
+    height: 32px;
+    background-color: #fff4df;
+    text-align: right;
+    margin-left: auto;
+}
+
+.timeText {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 133%;
+    letter-spacing: -0.02em;
+    color: #f6b83d;
+
+}
+
+.infoTitle {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 125%;
+    letter-spacing: -0.04em;
+    color: #262626;
+    margin-bottom: 14px;
+}
+
+.infoList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.infoData {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 129%;
+    letter-spacing: -0.02em;
+    color: #262626;
+}
+
+.infoSpan {
+    color: rgba(38, 38, 38, 0.5);
+}
+
+@media (min-width: 768px) {
+
+    .titlePage {
+        font-size: 54px;
+    }
+
+    .friendList {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+    .image {
+        width: 90px;
+        height: 90px;
+    }
+
+    .infoTitle {
+        font-size: 20px;
+    }
+
+    .time {
+        width: 100px;
+    }
+
+    .timeText {
+        font-size: 14px;
+    }
+
+    .itemContainer {
+        width: 342px;
+    }
+
+}
+
+@media (min-width: 1280px) {
+    .titlePage {
+        margin-bottom: 60px;
+    }
+
+    .friendList {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .itemContainer {
+        width: 370px;
+    }
+}

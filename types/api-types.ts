@@ -43,16 +43,20 @@ export type NoticesListResponce = {
 export type WorkDay = {
   _id: string;
   isOpen: boolean;
+  from: string | null;
+  to: string | null;
 };
 
 export type Friend = {
   _id: string;
+  email: string;
+  phone: string;
   title: string;
   url: string;
-  addressUrl: string;
+  addressUrl: string | null;
   imageUrl: string;
   address: string;
-  workDays: WorkDay[];
+  workDays: WorkDay[] | null | undefined;
 };
 
 // --------------------------------------   register / login  /  ...
