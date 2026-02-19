@@ -70,6 +70,7 @@ import Pagination from '@/components/Pagination/Pagination';
 import NoticesFilters from '@/components/NoticesFilters/NoticesFilters';
 import { LocationOption, type NoticesFiltersState } from '@/types/types';
 import { useMemo } from 'react'; // це для SelectLocation
+import css from './NoticesClient.module.css';
 
 export default function NoticesClient() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -209,8 +210,8 @@ export default function NoticesClient() {
   };
 
   return (
-    <div>
-      <h1>Find your favorite pet</h1>
+    <div className={css.noticesContainer}>
+      <h1 className={css.titlePage}>Find your favorite pet</h1>
 
       {isLoading && <Loading />}
 

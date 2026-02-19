@@ -26,7 +26,7 @@ export type Notice = {
   name: string;
   sex: string;
   birthday: string;
-  comme: string;
+  comment: string;
   location: string;
   imgURL: string;
   user: string;

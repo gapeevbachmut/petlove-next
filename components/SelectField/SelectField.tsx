@@ -1,9 +1,8 @@
 'use client';
 
-import { strict } from 'assert';
+import css from './SelectField.module.css';
 
 interface SelectFieldProps {
-  // label?: string;
   options: string[];
   value: string | null;
   placeholder?: string;
@@ -12,44 +11,45 @@ interface SelectFieldProps {
 }
 
 export default function SelectField({
-  // label,
   options,
   value,
   placeholder,
   showAllLabel = 'Show all',
   onChange,
 }: SelectFieldProps) {
+  const change = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selected = event.target.value;
+
+    if (selected === '__all__') {
+      onChange(null);
+      return;
+    }
+
+    if (selected === '__placeholder__') {
+      return;
+    }
+
+    onChange(selected);
+  };
   return (
-    <label>
+    <label className={css.labelField}>
       <select
+        className={css.labelSelect}
         value={value ?? '__placeholder__'}
-        onChange={e => {
-          const selected = e.target.value;
-
-          if (selected === '__all__') {
-            onChange(null);
-            return;
-          }
-
-          if (selected === '__placeholder__') {
-            return;
-          }
-
-          onChange(selected);
-        }}
+        onChange={change}
       >
-        {/* <option value="">{placeholder}</option> */}
-
         {/* PLACEHOLDER — показується одразу */}
-        <option value="__placeholder__" disabled>
+        <option value="__placeholder__" className={css.placeholder} disabled>
           {placeholder}
         </option>
 
         {/* SHOW ALL — скидає фільтр */}
-        <option value="__all__">{showAllLabel}</option>
+        <option value="__all__" className={css.optionAll}>
+          {showAllLabel}
+        </option>
 
         {options.map(option => (
-          <option key={option} value={option}>
+          <option key={option} value={option} className={css.value}>
             {option}
           </option>
         ))}

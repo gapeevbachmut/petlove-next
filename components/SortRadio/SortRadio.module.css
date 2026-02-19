@@ -1,0 +1,52 @@
+.container {
+    border: none;
+    margin-bottom: 20px;
+}
+
+.radioList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.label {
+    display: inline-flex;
+    background-color: inherit;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+}
+
+.input {
+    display: none;
+}
+
+.text {
+    display: inline-block;
+    background-color: #fff;
+    transition: 0.2s;
+    border-radius: 30px;
+    padding: 12px;
+    height: 42px;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 129%;
+    letter-spacing: -0.03em;
+    color: #262626;
+}
+
+/* стан checked */
+.input:checked+.text {
+    background-color: #f6b83d;
+    box-shadow: 0 0 0 1px #ccc inset;
+}
+
+@media (min-width: 768px) {
+    .text {
+        font-size: 16px;
+        padding: 14px;
+        height: 48px;
+    }
+
+}

@@ -8,6 +8,8 @@ import Modal from '../Modal/Modal';
 import NoticesPetModal from '../NoticesPetModal/NoticesPetModal';
 import { useAuthStore } from '@/stores/zustand/authStore';
 import ModalAuthRequired from '../ModalAuthRequired/ModalAuthRequired';
+import css from '../../app/(public)/notices/NoticesClient.module.css';
+import { it } from 'node:test';
 
 type Props = { item: Notice };
 
@@ -26,15 +28,70 @@ const NoticesItem = ({ item }: Props) => {
   };
 
   return (
-    <li>
-      <p>{item.title}</p>
+    <li className={css.noticesItem}>
+      <div className={css.imageBox}>
+        <Image
+          className={css.image}
+          src={item.imgURL}
+          alt={item.title}
+          width={375}
+          height={375}
+        />
+      </div>
 
-      <Image src={item.imgURL} alt={item.title} width={100} height={100} />
-      <p>Price:{item.price}</p>
-      <p>Popularity: {item.popularity}</p>
-      <Button variant="primary" onClick={handleLearnMore}>
-        Learn more
-      </Button>
+      <div className={css.titleBox}>
+        <p className={css.title}>{item.title}</p>
+        <span className={css.popularity}>
+          <svg width={18} height={18}>
+            <use href="/images/sprite.svg#icon-star"></use>
+          </svg>
+          {item.popularity}
+        </span>
+      </div>
+
+      <div className={css.description}>
+        <ul className={css.descrList}>
+          <li className={css.descrItem}>
+            <p className={css.descrTitle}>Name</p>
+            <p className={css.descrText}>{item.name}</p>
+          </li>
+          <li className={css.descrItem}>
+            <p className={css.descrTitle}>Birthday</p>
+            <p className={css.descrText}>{item.birthday}</p>
+          </li>
+          <li className={css.descrItem}>
+            <p className={css.descrTitle}>Sex</p>
+            <p className={css.descrText}>{item.sex}</p>
+          </li>
+          <li className={css.descrItem}>
+            <p className={css.descrTitle}>Species</p>
+            <p className={css.descrText}>{item.species}</p>
+          </li>
+          <li className={css.descrItem}>
+            <p className={css.descrTitle}>Category</p>
+            <p className={css.descrText}>{item.category}</p>
+          </li>
+        </ul>
+      </div>
+      <div className={css.commentBox}>
+        <p className={css.comment}> {item.comment}</p>
+        <p className={css.price}>Price:{item.price}</p>
+      </div>
+
+      <div className={css.buttonBox}>
+        <Button
+          className={css.more}
+          variant="primary"
+          onClick={handleLearnMore}
+        >
+          Learn more
+        </Button>
+        <Button className={css.heart} variant="simbol">
+          <svg width={18} height={18}>
+            <use href="/images/sprite.svg#icon-heart"></use>
+          </svg>
+        </Button>
+      </div>
 
       {isNoticeModalOpen && (
         <Modal onClose={() => setIsNoticeModalOpen(false)}>
