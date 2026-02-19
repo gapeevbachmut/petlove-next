@@ -72,10 +72,26 @@
     .filtersContainer {
         width: 1216px;
     }
+
+    .lineHide {
+        display: none;
+    }
+
+    .form {
+        position: relative;
+    }
+
+    .reset {
+        position: absolute;
+        right: 50;
+        bottom: -10px;
+    }
+
 }
 
 @media (min-width:1440px) {
     .filtersContainer {
         width: 1376px;
     }
+
 }

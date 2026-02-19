@@ -33,7 +33,7 @@ export default function NoticesFilters({
 
   return (
     <div className={css.filtersContainer}>
-      <form onSubmit={handleSubmit}>
+      <form className={css.form} onSubmit={handleSubmit}>
         <fieldset className={css.searchBox}>
           <ul className={css.filtersList}>
             <li>
@@ -105,7 +105,7 @@ export default function NoticesFilters({
             })
           }
         />
-        <hr className={css.line} />
+        <hr className={clsx(css.line, css.lineHide)} />
         {
           // у ТЗ є умова - скидання фільтрів
 

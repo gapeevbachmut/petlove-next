@@ -9,7 +9,6 @@ import NoticesPetModal from '../NoticesPetModal/NoticesPetModal';
 import { useAuthStore } from '@/stores/zustand/authStore';
 import ModalAuthRequired from '../ModalAuthRequired/ModalAuthRequired';
 import css from '../../app/(public)/notices/NoticesClient.module.css';
-import { it } from 'node:test';
 
 type Props = { item: Notice };
 
@@ -73,6 +72,7 @@ const NoticesItem = ({ item }: Props) => {
           </li>
         </ul>
       </div>
+
       <div className={css.commentBox}>
         <p className={css.comment}> {item.comment}</p>
         <p className={css.price}>Price:{item.price}</p>

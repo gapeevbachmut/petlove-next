@@ -48,6 +48,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin-bottom: 44px;
 }
 
 .noticesItem {
@@ -149,7 +150,7 @@
 
 .buttonBox {
     display: flex;
-    gap: 10px;
+    justify-content: space-between;
 }
 
 .more {
@@ -161,4 +162,66 @@
     line-height: 129%;
     letter-spacing: 1px;
     color: #fff;
+}
+
+@media (min-width:768px) {
+
+    .noticesContainer {
+        width: 704px;
+    }
+
+    .imageBox {
+        width: 294px;
+    }
+
+    .noticesList {
+        /* flex-wrap: wrap; */
+
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .title {
+        font-size: 18px;
+    }
+
+    .price {
+        font-size: 18px;
+    }
+}
+
+@media (min-width:1280px) {
+
+    .noticesContainer {
+        width: 1216px;
+    }
+
+    .noticesList {
+        padding: 0 32px;
+        gap: 32px;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .imageBox {
+        width: 315px;
+    }
+
+    .noticesItem {
+        width: 364px;
+    }
+}
+
+@media (min-width:1440px) {
+    .noticesContainer {
+        width: 1376px;
+    }
+
+    .noticesItem {
+        width: 400px;
+    }
+
+    .imageBox {
+        width: 350px;
+        height: 250px;
+    }
 }
