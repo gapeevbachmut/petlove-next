@@ -1,85 +1,97 @@
 .container {
-    width: 320px;
-    margin-top: 100px;
-}
-
-.NotFoundContainer {
-    max-width: 100%;
-    width: 100%;
-    margin: 0 auto;
-    padding: 50px;
+    width: 335px;
+    height: 712px;
+    border-radius: 30px;
+    background-color: #f6b83d;
     display: flex;
     flex-direction: column;
+    gap: 20px;
     align-items: center;
+    justify-content: center;
 
-    border-radius: 12px;
-    background-color: var(--gray-light);
-    border: solid, 2px #d84343;
-
-
-    box-shadow: inset -32px -32px 64px #be3b3b,
-        inset 32px 32px 64px #f24b4b;
 }
 
-.NotFoundTitle {
-    font-size: 40px;
+.list {
+    display: flex;
+    gap: 8px;
+}
+
+
+
+.simbol {
+    font-family: var(--font-family);
+    font-weight: 800;
+    font-size: 120px;
+    line-height: 100%;
+    color: #fff;
+}
+
+.image {
+    border-radius: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.text {
+    font-family: var(--font-family);
     font-weight: 700;
-    margin-bottom: 24px;
-    text-align: center;
-}
-
-.NotFoundImage {
-    width: 250px;
-    border-radius: 8px;
-}
-
-.NotFoundDescr {
-    font-size: 28px;
-    font-weight: 500;
-}
-
-.NotFoundText {
-    font-size: 18px;
+    font-size: 16px;
+    line-height: 125%;
+    letter-spacing: -0.03em;
+    color: #fff;
 }
 
 .NotFoundLink {
-    text-align: center;
-    margin-top: 32px;
-    cursor: pointer;
-    transition: background-color 0.25s ease, transform 0.1s ease;
+    border-radius: 30px;
+    padding: 12px 30px;
+    width: 150px;
+    height: 42px;
+    background: #fff4df;
     font-family: var(--font-family);
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 150%;
-    color: var(--text);
-    border: 1px solid var(--gray);
-    border-radius: 100px;
-    padding: 6px 12px;
-    background-color: var(--gray-light);
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 129%;
+    letter-spacing: -0.03em;
+    color: #f6b83d;
 }
 
-.NotFoundLink:hover {
-    background-color: var(--button-hover);
-    border: 1px solid var(--button);
-    transform: scale(1.03);
-}
-
-.NotFoundLink:active {
-    background-color: var(--gray);
-    border: 1px solid var(--gray-light);
-    transform: scale(1.03);
-}
 
 @media (min-width:768px) {
     .container {
-        width: 660px;
+        width: 704px;
+    }
+
+    .image {
+        width: 280px;
+        height: 280px;
+    }
+
+    .simbol {
+        font-size: 300px;
+    }
+
+    .text {
+        font-size: 24px;
+    }
+
+    .NotFoundLink {
+        font-size: 16px;
+        width: 162px;
+        height: 48px;
+        padding: 14px 30px;
+    }
+
+}
+
+@media (min-width:1280px) {
+    .container {
+        width: 1216px;
     }
 
 }
 
 @media (min-width:1440px) {
     .container {
-        width: 1200px;
+        width: 1376px;
     }
 
 }

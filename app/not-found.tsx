@@ -2,20 +2,32 @@
 
 import Link from 'next/link';
 import css from './NotFound.module.css';
+import Image from 'next/image';
 
 const NotFound = () => {
   return (
     <div className={css.container}>
-      <div className={css.NotFoundContainer}>
-        <h1 className={css.NotFoundTitle}>OOPS!!!</h1>
-        <p className={css.NotFoundTitle}>You have a problem!</p>
-        <p className={css.NotFoundTitle}>404</p>
-        <h3 className={css.NotFoundDescr}>Page not found</h3>
-        <p className={css.NotFoundText}>Try again.</p>
-        <Link href="/" className={css.NotFoundLink}>
-          Home Page
-        </Link>
-      </div>
+      <ul className={css.list}>
+        <li className={css.item}>
+          <span className={css.simbol}>4</span>
+        </li>
+        <li className={css.item}>
+          <Image
+            className={css.image}
+            src="https://res.cloudinary.com/dyounr2tf/image/upload/v1771606513/IMG_5099_1_1_hvix2v.png"
+            alt="Login page"
+            width={116}
+            height={116}
+          />
+        </li>
+        <li className={css.item}>
+          <span className={css.simbol}>4</span>
+        </li>
+      </ul>
+      <p className={css.text}>Ooops! This page not found :(</p>
+      <Link href="/" className={css.NotFoundLink}>
+        To home page
+      </Link>
     </div>
   );
 };
