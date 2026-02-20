@@ -137,6 +137,10 @@
     .form {
         width: 424px;
     }
+
+    .input {
+        width: 384px;
+    }
 }
 
 @media (min-width: 1280px) {

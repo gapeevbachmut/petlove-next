@@ -137,6 +137,15 @@
     .form {
         width: 424px;
     }
+
+    .input {
+        width: 384px;
+    }
+
+    /* .passwordEye {
+        right: 106px;
+        top: 12px;
+    } */
 }
 
 @media (min-width: 1280px) {
