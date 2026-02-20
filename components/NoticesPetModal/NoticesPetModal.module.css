@@ -70,6 +70,12 @@
     gap: 2px;
 }
 
+.description {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
 .descrList {
     display: flex;
     gap: 28px;
@@ -140,4 +146,26 @@
     display: flex;
     align-items: center;
     gap: 8px;
+}
+
+@media (min-width:768px) {
+    .container {
+        padding: 40px;
+    }
+
+    .descrTitle {
+        font-size: 14px;
+    }
+
+    .descrText {
+        font-size: 14px;
+    }
+
+    .comment {
+        font-size: 16px;
+    }
+
+    .price {
+        font-size: 20px;
+    }
 }

@@ -1,15 +1,25 @@
 'use client';
 
+import Button from '@/components/Button/Button';
 import { ApiError } from '@/lib/api/api';
 import { register } from '@/lib/api/api';
 import { useAuthStore } from '@/stores/zustand/authStore';
 import { RegisterRequest } from '@/types/api-types';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import css from './Register.module.css';
+import Link from 'next/link';
 
 export default function Registration() {
   const router = useRouter();
   const [error, setError] = useState('');
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [isVisible, setIsVisible] = useState(false);
 
   // Отримуємо метод із стора
   const setUser = useAuthStore(state => state.setUser);
@@ -22,13 +32,18 @@ export default function Registration() {
       const res = await register(formValues);
 
       // Виконуємо редірект або відображаємо помилку
-      if (res) {
-        // Записуємо користувача у глобальний стан
-        setUser(res);
-        router.push('/profile');
-      } else {
-        setError('Invalid email or password');
-      }
+
+      // Записуємо користувача у глобальний стан
+      setUser(res);
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+      setIsVisible(false);
+      router.push('/profile');
+      // if (password !== confirmPassword) {
+      //   setError('Passwords do not match');
+      //   return ;
+      // }
     } catch (error) {
       setError(
         (error as ApiError).response?.data?.error ??
@@ -38,25 +53,136 @@ export default function Registration() {
     }
   };
 
+  const handleEye = () => {
+    setIsVisible(prev => !prev);
+  };
+
+  const confirmPass = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setConfirmPassword(value);
+
+    if (password && value !== password) {
+      setError('Passwords do not match');
+    } else {
+      setError('');
+    }
+  };
+
   return (
-    <div>
-      <h2>REGISTRATION PAGE</h2>
-      <form action={handleSubmit}>
-        <label>
-          Username
-          <input type="text" name="name" required />
-        </label>
-        <label>
-          Email
-          <input type="email" name="email" required />
-        </label>
-        <label>
-          Password
-          <input type="password" name="password" required />
-        </label>
-        <button type="submit">Register</button>
+    <div className={css.container}>
+      <div className={css.imgBox}>
+        <Image
+          className={css.image}
+          src="https://res.cloudinary.com/dyounr2tf/image/upload/v1771592953/image_1_gcnbxb.png"
+          alt="Login page"
+          width={335}
+          height={280}
+        />
+      </div>
+      <form action={handleSubmit} className={css.form}>
+        <h2 className={css.title}>Registration</h2>
+        <p className={css.text}>Thank you for your interest in our platform.</p>
+        <div className={css.inputBox}>
+          {/* --- NAME--- */}
+
+          <label className={css.label}>
+            <input
+              className={css.input}
+              type="text"
+              name="name"
+              value={name}
+              required
+              placeholder="Name"
+              onChange={e => {
+                setName(e.target.value);
+                setError('');
+              }}
+            />
+          </label>
+
+          {/* --- EMAIL --- */}
+          <label className={css.label}>
+            <input
+              className={css.input}
+              type="email"
+              name="email"
+              value={email}
+              required
+              placeholder="Email"
+              onChange={e => {
+                setEmail(e.target.value);
+                setError('');
+              }}
+            />
+          </label>
+
+          {/* --- PASSWORD --- */}
+          <label className={css.label}>
+            <input
+              className={css.input}
+              type={isVisible ? 'text' : 'password'}
+              name="password"
+              value={password}
+              required
+              placeholder="Password"
+              onChange={e => {
+                setPassword(e.target.value);
+                setError('');
+              }}
+            />
+
+            <button
+              className={css.passwordEye}
+              type="button"
+              onClick={handleEye}
+            >
+              <svg width={18} height={18}>
+                <use
+                  href={`/images/sprite.svg#${isVisible ? 'icon-eye' : 'icon-eye-off'}`}
+                ></use>
+              </svg>
+            </button>
+          </label>
+
+          {/* --- CONFIRM   PASSWORD --- */}
+          <label className={css.label}>
+            <input
+              className={css.input}
+              type={isVisible ? 'text' : 'password'}
+              name="confirmPassword"
+              value={confirmPassword}
+              required
+              placeholder="Confirm Password"
+              // onChange={e => {
+              //   setConfirmPassword(e.target.value);
+              //   setError('');
+              // }}
+              onChange={confirmPass}
+            />
+
+            <button
+              className={css.passwordEye}
+              type="button"
+              onClick={handleEye}
+            >
+              <svg width={18} height={18}>
+                <use
+                  href={`/images/sprite.svg#${isVisible ? 'icon-eye' : 'icon-eye-off'}`}
+                ></use>
+              </svg>
+            </button>
+          </label>
+        </div>
+        {error && <p className={css.error}>{error}</p>}
+        <Button className={css.loginBtn}>Registration</Button>
+
+        <div className={css.hintBox}>
+          <p className={css.hintText}>Already have an account? </p>
+          <Link href={'/auth/login'} className={css.hintLink}>
+            Login
+          </Link>
+        </div>
       </form>
-      {error && <p>{error}</p>}
     </div>
   );
 }
