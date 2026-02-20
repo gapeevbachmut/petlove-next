@@ -71,6 +71,15 @@ export default function Registration() {
   return (
     <div className={css.container}>
       <div className={css.imgBox}>
+        <div className={css.textContainer}>
+          <Image
+            className={css.block}
+            src="https://res.cloudinary.com/dyounr2tf/image/upload/v1771599795/block_1_tezkju.png"
+            alt="Login page"
+            width={294}
+            height={122}
+          />
+        </div>
         <Image
           className={css.image}
           src="https://res.cloudinary.com/dyounr2tf/image/upload/v1771592953/image_1_gcnbxb.png"
@@ -79,110 +88,115 @@ export default function Registration() {
           height={280}
         />
       </div>
-      <form action={handleSubmit} className={css.form}>
-        <h2 className={css.title}>Registration</h2>
-        <p className={css.text}>Thank you for your interest in our platform.</p>
-        <div className={css.inputBox}>
-          {/* --- NAME--- */}
 
-          <label className={css.label}>
-            <input
-              className={css.input}
-              type="text"
-              name="name"
-              value={name}
-              required
-              placeholder="Name"
-              onChange={e => {
-                setName(e.target.value);
-                setError('');
-              }}
-            />
-          </label>
+      <div className={css.formContainer}>
+        <form action={handleSubmit} className={css.form}>
+          <h2 className={css.title}>Registration</h2>
+          <p className={css.text}>
+            Thank you for your interest in our platform.
+          </p>
+          <div className={css.inputBox}>
+            {/* --- NAME--- */}
 
-          {/* --- EMAIL --- */}
-          <label className={css.label}>
-            <input
-              className={css.input}
-              type="email"
-              name="email"
-              value={email}
-              required
-              placeholder="Email"
-              onChange={e => {
-                setEmail(e.target.value);
-                setError('');
-              }}
-            />
-          </label>
+            <label className={css.label}>
+              <input
+                className={css.input}
+                type="text"
+                name="name"
+                value={name}
+                required
+                placeholder="Name"
+                onChange={e => {
+                  setName(e.target.value);
+                  setError('');
+                }}
+              />
+            </label>
 
-          {/* --- PASSWORD --- */}
-          <label className={css.label}>
-            <input
-              className={css.input}
-              type={isVisible ? 'text' : 'password'}
-              name="password"
-              value={password}
-              required
-              placeholder="Password"
-              onChange={e => {
-                setPassword(e.target.value);
-                setError('');
-              }}
-            />
+            {/* --- EMAIL --- */}
+            <label className={css.label}>
+              <input
+                className={css.input}
+                type="email"
+                name="email"
+                value={email}
+                required
+                placeholder="Email"
+                onChange={e => {
+                  setEmail(e.target.value);
+                  setError('');
+                }}
+              />
+            </label>
 
-            <button
-              className={css.passwordEye}
-              type="button"
-              onClick={handleEye}
-            >
-              <svg width={18} height={18}>
-                <use
-                  href={`/images/sprite.svg#${isVisible ? 'icon-eye' : 'icon-eye-off'}`}
-                ></use>
-              </svg>
-            </button>
-          </label>
+            {/* --- PASSWORD --- */}
+            <label className={css.label}>
+              <input
+                className={css.input}
+                type={isVisible ? 'text' : 'password'}
+                name="password"
+                value={password}
+                required
+                placeholder="Password"
+                onChange={e => {
+                  setPassword(e.target.value);
+                  setError('');
+                }}
+              />
 
-          {/* --- CONFIRM   PASSWORD --- */}
-          <label className={css.label}>
-            <input
-              className={css.input}
-              type={isVisible ? 'text' : 'password'}
-              name="confirmPassword"
-              value={confirmPassword}
-              required
-              placeholder="Confirm Password"
-              // onChange={e => {
-              //   setConfirmPassword(e.target.value);
-              //   setError('');
-              // }}
-              onChange={confirmPass}
-            />
+              <button
+                className={css.passwordEye}
+                type="button"
+                onClick={handleEye}
+              >
+                <svg width={18} height={18}>
+                  <use
+                    href={`/images/sprite.svg#${isVisible ? 'icon-eye' : 'icon-eye-off'}`}
+                  ></use>
+                </svg>
+              </button>
+            </label>
 
-            <button
-              className={css.passwordEye}
-              type="button"
-              onClick={handleEye}
-            >
-              <svg width={18} height={18}>
-                <use
-                  href={`/images/sprite.svg#${isVisible ? 'icon-eye' : 'icon-eye-off'}`}
-                ></use>
-              </svg>
-            </button>
-          </label>
-        </div>
-        {error && <p className={css.error}>{error}</p>}
-        <Button className={css.loginBtn}>Registration</Button>
+            {/* --- CONFIRM   PASSWORD --- */}
+            <label className={css.label}>
+              <input
+                className={css.input}
+                type={isVisible ? 'text' : 'password'}
+                name="confirmPassword"
+                value={confirmPassword}
+                required
+                placeholder="Confirm Password"
+                // onChange={e => {
+                //   setConfirmPassword(e.target.value);
+                //   setError('');
+                // }}
+                onChange={confirmPass}
+              />
 
-        <div className={css.hintBox}>
-          <p className={css.hintText}>Already have an account? </p>
-          <Link href={'/auth/login'} className={css.hintLink}>
-            Login
-          </Link>
-        </div>
-      </form>
+              <button
+                className={css.passwordEye}
+                type="button"
+                onClick={handleEye}
+              >
+                <svg width={18} height={18}>
+                  <use
+                    href={`/images/sprite.svg#${isVisible ? 'icon-eye' : 'icon-eye-off'}`}
+                  ></use>
+                </svg>
+              </button>
+            </label>
+          </div>
+          {error && <p className={css.error}>{error}</p>}
+          <Button className={css.loginBtn}>Registration</Button>
+
+          <div className={css.hintBox}>
+            <p className={css.hintText}>Already have an account? </p>
+            <Link href={'/auth/login'} className={css.hintLink}>
+              Login
+            </Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
