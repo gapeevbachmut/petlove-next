@@ -8,8 +8,10 @@ type Props = { item: Notice };
 export default function NoticesPetModal({ item }: Props) {
   const handleAddTo = () => {};
   return (
-    <div>
+    <div className={css.container}>
+      <div className={css.imgContainer}></div>
       <div className={css.imageBox}>
+        <p className={css.imgText}>Sell</p>
         <Image
           className={css.image}
           src={item.imgURL}
@@ -47,15 +49,11 @@ export default function NoticesPetModal({ item }: Props) {
             <p className={css.descrTitle}>Species</p>
             <p className={css.descrText}>{item.species}</p>
           </li>
-          <li className={css.descrItem}>
-            <p className={css.descrTitle}>Category</p>
-            <p className={css.descrText}>{item.category}</p>
-          </li>
         </ul>
       </div>
       <div className={css.commentBox}>
         <p className={css.comment}> {item.comment}</p>
-        <p className={css.price}>Price:{item.price}</p>
+        <p className={css.price}>$ {item.price}</p>
       </div>
       <div className={css.buttonBox}>
         <Button className={css.add} variant="primary" onClick={handleAddTo}>
