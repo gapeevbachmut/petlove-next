@@ -7,7 +7,7 @@ import { useAuthStore } from '@/stores/zustand/authStore';
 import { RegisterRequest } from '@/types/api-types';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import css from './Register.module.css';
 import Link from 'next/link';
 
@@ -26,25 +26,39 @@ export default function Registration() {
 
   const handleSubmit = async (formData: FormData) => {
     try {
+      setError('');
       // Типізуємо дані форми
-      const formValues = Object.fromEntries(formData) as RegisterRequest;
+      const formValues = Object.fromEntries(formData) as RegisterRequest & {
+        confirmPassword?: string;
+      };
+
+      const { confirmPassword, ...dataToSend } = formValues;
+
+      if (password !== confirmPassword) {
+        setError('Passwords do not match');
+        return;
+      }
+
       // Виконуємо запит
-      const res = await register(formValues);
+      const res = await register(dataToSend);
 
       // Виконуємо редірект або відображаємо помилку
 
       // Записуємо користувача у глобальний стан
       setUser(res);
+      setName('');
       setEmail('');
       setPassword('');
       setConfirmPassword('');
       setIsVisible(false);
       router.push('/profile');
-      // if (password !== confirmPassword) {
-      //   setError('Passwords do not match');
-      //   return ;
-      // }
     } catch (error) {
+      const status = (error as ApiError).response?.status;
+
+      if (status === 409) {
+        setError('User with this email already exists');
+        return;
+      }
       setError(
         (error as ApiError).response?.data?.error ??
           (error as ApiError).message ??
@@ -60,13 +74,19 @@ export default function Registration() {
   const confirmPass = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setConfirmPassword(value);
+  };
+  useEffect(() => {
+    if (!confirmPassword) {
+      setError('');
+      return;
+    }
 
-    if (password && value !== password) {
+    if (password !== confirmPassword) {
       setError('Passwords do not match');
     } else {
       setError('');
     }
-  };
+  }, [password, confirmPassword]);
 
   return (
     <div className={css.container}>
@@ -166,10 +186,6 @@ export default function Registration() {
                 value={confirmPassword}
                 required
                 placeholder="Confirm Password"
-                // onChange={e => {
-                //   setConfirmPassword(e.target.value);
-                //   setError('');
-                // }}
                 onChange={confirmPass}
               />
 
@@ -187,7 +203,9 @@ export default function Registration() {
             </label>
           </div>
           {error && <p className={css.error}>{error}</p>}
-          <Button className={css.loginBtn}>Registration</Button>
+          <Button className={css.loginBtn} disabled={!!error}>
+            Registration
+          </Button>
 
           <div className={css.hintBox}>
             <p className={css.hintText}>Already have an account? </p>
