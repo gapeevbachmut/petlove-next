@@ -4,6 +4,7 @@
 import Button from '@/components/Button/Button';
 import Modal from '@/components/Modal/Modal';
 import ModalEditUser from '@/components/ModalEditUser/ModalEditUser';
+import UserCard from '@/components/UserCard/UserCard';
 import { useAuthStore } from '@/stores/zustand/authStore';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -33,27 +34,30 @@ export default function Profile() {
 
   return (
     <>
-      <h1>Page PROFILE</h1>
-      <p>user: {user?.name}</p>
-      <p>email: {user?.email}</p>
-      <p>phone: {user?.phone}</p>
+      {/* <UserCard /> */}
+      <div>
+        <h1>Page PROFILE</h1>
+        <p>user: {user?.name}</p>
+        <p>email: {user?.email}</p>
+        <p>phone: {user?.phone}</p>
 
-      <Image
-        src={avatarSrc}
-        alt="User avatar"
-        width={300}
-        height={300}
-        // className={css.avatar}
-      />
+        <Image
+          src={avatarSrc}
+          alt="User avatar"
+          width={300}
+          height={300}
+          // className={css.avatar}
+        />
 
-      <Button variant="primary" onClick={handleModalEditUser}>
-        Edit profile
-      </Button>
-      {isModalEditUser && (
-        <Modal onClose={closeModal}>
-          <ModalEditUser onClose={closeModal} />
-        </Modal>
-      )}
+        <Button variant="primary" onClick={handleModalEditUser}>
+          Edit profile
+        </Button>
+        {isModalEditUser && (
+          <Modal onClose={closeModal}>
+            <ModalEditUser onClose={closeModal} />
+          </Modal>
+        )}
+      </div>
     </>
   );
 }

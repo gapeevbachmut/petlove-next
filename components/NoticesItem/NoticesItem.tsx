@@ -26,6 +26,13 @@ const NoticesItem = ({ item }: Props) => {
     }
   };
 
+  const handlePetsLike = () => {
+    if (!user) {
+      setIsAuthModalOpen(true);
+    }
+    // якщо є юзер додати до обраного
+  };
+
   return (
     <li className={css.noticesItem}>
       <div className={css.imageBox}>
@@ -86,7 +93,7 @@ const NoticesItem = ({ item }: Props) => {
         >
           Learn more
         </Button>
-        <Button className={css.heart} variant="simbol">
+        <Button className={css.heart} variant="simbol" onClick={handlePetsLike}>
           <svg width={18} height={18}>
             <use href="/images/sprite.svg#icon-heart"></use>
           </svg>

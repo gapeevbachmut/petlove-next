@@ -120,7 +120,14 @@ const Header = () => {
                 <use href="/images/sprite.svg#icon-user"></use>
               </svg>
             </Button>
-            <p className={css.username}>{user?.name}</p>
+            <p
+              className={clsx(
+                css.username,
+                isHomePage ? css.usernameHome : css.usernameInner
+              )}
+            >
+              {user?.name}
+            </p>
           </div>
         )}
 
