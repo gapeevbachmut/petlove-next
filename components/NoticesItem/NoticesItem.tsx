@@ -10,10 +10,13 @@ import { useAuthStore } from '@/stores/zustand/authStore';
 import ModalAuthRequired from '../ModalAuthRequired/ModalAuthRequired';
 import css from '../../app/(public)/notices/NoticesClient.module.css';
 
-type Props = { item: Notice };
+type Props = { item: Notice; isProfile?: boolean };
 
 const NoticesItem = ({ item }: Props) => {
   const user = useAuthStore(state => state.user);
+  const setUser = useAuthStore(state => state.setUser);
+
+  const isFavorite = user?.noticesFavorites?.some(fav => fav._id === item._id);
 
   const [isNoticeModalOpen, setIsNoticeModalOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -31,6 +34,30 @@ const NoticesItem = ({ item }: Props) => {
       setIsAuthModalOpen(true);
     }
     // якщо є юзер додати до обраного
+    if (user)
+      try {
+        let updatedFavorites: Notice[];
+
+        if (isFavorite) {
+          //  Видалення з обраного
+          updatedFavorites = user.noticesFavorites.filter(
+            fav => fav._id !== item._id
+          );
+        } else {
+          //  Додавання в обране
+          updatedFavorites = [...user.noticesFavorites, item];
+        }
+
+        //  API для toggle —  тут
+        // await toggleFavorite(item._id);
+
+        setUser({
+          ...user,
+          noticesFavorites: updatedFavorites,
+        });
+      } catch (error) {
+        console.error('Favorite error:', error);
+      }
   };
 
   return (
@@ -95,7 +122,9 @@ const NoticesItem = ({ item }: Props) => {
         </Button>
         <Button className={css.heart} variant="simbol" onClick={handlePetsLike}>
           <svg width={18} height={18}>
-            <use href="/images/sprite.svg#icon-heart"></use>
+            <use
+              href={`/images/sprite.svg#${isFavorite ? 'icon-trash' : 'icon-heart'}`}
+            ></use>
           </svg>
         </Button>
       </div>

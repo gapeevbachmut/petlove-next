@@ -81,6 +81,7 @@ export type User = {
   token?: string;
   createdAt: Date;
   updatedAt: Date;
+  noticesFavorites: Notice[];
 };
 // noticesViewed []
 // noticesFavorites []

@@ -28,6 +28,7 @@ export type User = {
   name: string;
   email: string;
   avatar?: string;
+  noticesFavorites: [];
 };
 
 export interface AuthState {

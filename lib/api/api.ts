@@ -65,6 +65,13 @@ export const getNotices = async (): Promise<Notice[]> => {
   return response.data.results;
 };
 
+export const getNoticesByIds = async (ids: string[]): Promise<Notice[]> => {
+  const response = await apiClient.get<NoticesListResponce>(`/notices`, {
+    params: { limit: 100, ids: ids.join(',') },
+  });
+  return response.data.results;
+};
+
 export const getSingleNotice = async (id: string) => {
   const response = await publicApi.get<Notice>(`/notices/${id}`);
   return response.data;

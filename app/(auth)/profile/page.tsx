@@ -5,13 +5,30 @@ import Button from '@/components/Button/Button';
 import Modal from '@/components/Modal/Modal';
 import ModalEditUser from '@/components/ModalEditUser/ModalEditUser';
 import UserCard from '@/components/UserCard/UserCard';
+import UserFavoriteNoticesList from '@/components/UserFavoriteNoticesList/UserFavoriteNoticesList';
+import { getNoticesByIds } from '@/lib/api/api';
 import { useAuthStore } from '@/stores/zustand/authStore';
+import { Notice } from '@/types/api-types';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Profile() {
   const user = useAuthStore(state => state.user);
   const [isModalEditUser, setIsModalEditUser] = useState(false);
+  const [favoriteNotices, setFavoriteNotices] = useState<Notice[]>([]);
+
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      if (!user?.noticesFavorites?.length) return;
+
+      const ids = user.noticesFavorites.map(fav => fav._id);
+
+      const res = await getNoticesByIds(ids);
+      setFavoriteNotices(res);
+    };
+
+    fetchFavorites();
+  }, [user]);
 
   const openModal = () => setIsModalEditUser(true);
 
@@ -52,6 +69,8 @@ export default function Profile() {
         <Button variant="primary" onClick={handleModalEditUser}>
           Edit profile
         </Button>
+
+        <UserFavoriteNoticesList notices={favoriteNotices} />
         {isModalEditUser && (
           <Modal onClose={closeModal}>
             <ModalEditUser onClose={closeModal} />
