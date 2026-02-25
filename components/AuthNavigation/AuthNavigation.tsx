@@ -20,7 +20,7 @@ const AuthNavigation = ({ handleNavigate }: Props) => {
 
   const handleLogout = async () => {
     logout();
-    clearIsAuthenticated();
+    // clearIsAuthenticated();
     router.push('/');
   };
 

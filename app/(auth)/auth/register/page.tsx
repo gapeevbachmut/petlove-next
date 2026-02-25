@@ -6,6 +6,7 @@ import { register } from '@/lib/api/api';
 import { useAuthStore } from '@/stores/zustand/authStore';
 import { RegisterRequest } from '@/types/api-types';
 import Image from 'next/image';
+import { getImageProps } from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import css from './Register.module.css';
@@ -88,6 +89,29 @@ export default function Registration() {
     }
   }, [password, confirmPassword]);
 
+  /* IMAGE */
+  const common = { alt: 'Register page', className: css.image };
+
+  // Конфіг для мобілки
+  const {
+    props: { srcSet: mobile },
+  } = getImageProps({
+    ...common,
+    width: 335,
+    height: 280,
+    src: 'https://res.cloudinary.com/dyounr2tf/image/upload/v1771606135/image_3_pgbmoo.png',
+  });
+
+  // Конфіг для десктопа (1280px+)
+  const {
+    props: { srcSet: desktop, ...rest },
+  } = getImageProps({
+    ...common,
+    width: 592,
+    height: 654,
+    src: 'https://res.cloudinary.com/dyounr2tf/image/upload/v1772030159/image_5_e1eyme.png',
+  });
+
   return (
     <div className={css.container}>
       <div className={css.imgBox}>
@@ -95,18 +119,23 @@ export default function Registration() {
           <Image
             className={css.block}
             src="https://res.cloudinary.com/dyounr2tf/image/upload/v1771599795/block_1_tezkju.png"
-            alt="Login page"
+            alt="Register page"
             width={294}
             height={122}
           />
         </div>
-        <Image
+        <picture>
+          <source media="(min-width: 1280px)" srcSet={desktop} />
+          <source media="(max-width: 1279px)" srcSet={mobile} />
+          <img {...rest} />
+        </picture>
+        {/* <Image
           className={css.image}
           src="https://res.cloudinary.com/dyounr2tf/image/upload/v1771592953/image_1_gcnbxb.png"
-          alt="Login page"
+          alt="Register page"
           width={335}
           height={280}
-        />
+        /> */}
       </div>
 
       <div className={css.formContainer}>

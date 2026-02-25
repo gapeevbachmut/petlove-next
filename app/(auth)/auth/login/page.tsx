@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import css from './Login.module.css';
 import Image from 'next/image';
+import { getImageProps } from 'next/image';
 import Button from '@/components/Button/Button';
 import Link from 'next/link';
 
@@ -53,6 +54,29 @@ export default function LogIn() {
     setIsVisible(prev => !prev);
   };
 
+  /* IMAGE */
+  const common = { alt: 'Login page', className: css.image };
+
+  // Конфіг для мобілки
+  const {
+    props: { srcSet: mobile },
+  } = getImageProps({
+    ...common,
+    width: 335,
+    height: 280,
+    src: 'https://res.cloudinary.com/dyounr2tf/image/upload/v1771580453/login_zdrny7.png',
+  });
+
+  // Конфіг для десктопа (1280px+)
+  const {
+    props: { srcSet: desktop, ...rest },
+  } = getImageProps({
+    ...common,
+    width: 592,
+    height: 654,
+    src: 'https://res.cloudinary.com/dyounr2tf/image/upload/v1772030159/image_4_ftgsqj.png',
+  });
+
   return (
     <div className={css.container}>
       <div className={css.imgBox}>
@@ -66,13 +90,18 @@ export default function LogIn() {
           />
         </div>
 
-        <Image
+        <picture>
+          <source media="(min-width: 1280px)" srcSet={desktop} />
+          <source media="(max-width: 1279px)" srcSet={mobile} />
+          <img {...rest} />
+        </picture>
+        {/* <Image
           className={css.image}
           src="https://res.cloudinary.com/dyounr2tf/image/upload/v1771580453/login_zdrny7.png"
           alt="Login page"
           width={335}
           height={280}
-        />
+        /> */}
       </div>
       <div className={css.formContainer}>
         <form action={handleSubmit} className={css.form}>
