@@ -55,7 +55,8 @@ export default function NoticesPetModal({ item }: Props) {
         <p className={css.comment}> {item.comment}</p>
         <p className={css.price}>$ {item.price}</p>
       </div>
-      <div className={css.buttonBox}>
+
+      {/* <div className={css.buttonBox}>
         <Button className={css.add} variant="primary" onClick={handleAddTo}>
           Add to
           <svg width={18} height={18} className={css.heart}>
@@ -69,7 +70,7 @@ export default function NoticesPetModal({ item }: Props) {
         >
           Contact
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 }

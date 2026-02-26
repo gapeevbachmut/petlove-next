@@ -1,11 +1,10 @@
 'use client';
 
-// import Link from 'next/link';
-// import Button from '../Button/Button';
 import AvatarPicker from '../AvatarPicker/AvatarPicker';
-import { useEffect, useState } from 'react';
-import { getMe, updateMe } from '@/lib/api/api';
+import { useState } from 'react';
+import { updateMe } from '@/lib/api/api';
 import { useAuthStore } from '@/stores/zustand/authStore';
+import css from './ModalEditUser.module.css';
 import Button from '../Button/Button';
 
 type Props = {
@@ -16,19 +15,25 @@ export default function ModalEditUser({ onClose }: Props) {
   const setUser = useAuthStore(state => state.setUser);
   const currentUser = useAuthStore(state => state.user);
 
-  const [userName, setUserName] = useState(currentUser?.name ?? '');
+  const [username, setUsername] = useState(currentUser?.name ?? '');
+  const [email, setEmail] = useState(currentUser?.email ?? '');
+  const [phone, setPhone] = useState(currentUser?.phone ?? '');
   const [avatarUrl, setAvatarUrl] = useState(currentUser?.avatar ?? '');
+  const [loading, setLoading] = useState(false);
 
   const handleSaveUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
+      setLoading(true);
+
       const updatedUser = await updateMe({
-        name: userName,
+        name: username,
+        email,
+        phone,
         avatar: avatarUrl,
       });
-      //   console.log('UPDATED USER:', updatedUser);
-      //  ОНОВЛЮЄМО ZUSTAND
+
       setUser({
         ...updatedUser,
         token: currentUser?.token,
@@ -37,27 +42,50 @@ export default function ModalEditUser({ onClose }: Props) {
       onClose();
     } catch (error) {
       console.error('Update error:', error);
+    } finally {
+      setLoading(false);
     }
-  };
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserName(event.target.value);
   };
 
   return (
     <div>
-      <div>
-        <h1>Edit profile</h1>
-        <AvatarPicker
-          profileAvatarUrl={avatarUrl}
-          onChangeAvatar={setAvatarUrl}
+      <h1 className={css.title}>Edit information</h1>
+
+      <AvatarPicker
+        profileAvatarUrl={avatarUrl}
+        onChangeAvatar={setAvatarUrl}
+      />
+
+      <form onSubmit={handleSaveUser} className={css.form}>
+        <input
+          className={css.input}
+          type="text"
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+          placeholder="Name"
         />
-        <form onSubmit={handleSaveUser}>
-          <input type="text" value={userName} onChange={handleChange} />
-          {/* <Button type="submit">Save user</Button> */}
-          <button type="submit">Save change</button>
-        </form>
-      </div>
+
+        <input
+          className={css.input}
+          type="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          placeholder="Email"
+          disabled
+        />
+
+        <input
+          className={css.input}
+          type="text"
+          value={phone}
+          onChange={e => setPhone(e.target.value)}
+          placeholder="Phone"
+        />
+
+        <Button variant="primary" disabled={loading} className={css.save}>
+          {loading ? 'Saving...' : 'Save changes'}
+        </Button>
+      </form>
     </div>
   );
 }

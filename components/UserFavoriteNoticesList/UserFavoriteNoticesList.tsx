@@ -8,7 +8,7 @@ const UserFavoriteNoticesList = ({ notices }: { notices: Notice[] }) => {
 
   const favoriteList = user?.noticesFavorites ?? [];
   if (!favoriteList.length) {
-    return <p>You have no favorite pets yet</p>;
+    return <p className={css.text}>You have no favorite pets yet</p>;
   }
 
   return (

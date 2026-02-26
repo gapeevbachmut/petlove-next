@@ -1,5 +1,4 @@
 // components/AvatarPicker/AvatarPicker.tsx
-
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -12,63 +11,71 @@ type Props = {
   profileAvatarUrl?: string;
 };
 
+const defaultAvatar =
+  'https://res.cloudinary.com/dyounr2tf/image/upload/v1771165302/avatar-WHO_h5eh4t.png';
+
 const AvatarPicker = ({ onChangeAvatar, profileAvatarUrl }: Props) => {
+  const [inputValue, setInputValue] = useState('');
+  const [previewUrl, setPreviewUrl] = useState(defaultAvatar);
   const [error, setError] = useState('');
-  const [previewUrl, setPreviewUrl] = useState('');
 
   useEffect(() => {
-    setPreviewUrl(profileAvatarUrl ?? '');
-    // if (profileAvatarUrl) {
-    //   setPreviewUrl(profileAvatarUrl ?? '');
-    // }
+    if (profileAvatarUrl) {
+      setPreviewUrl(profileAvatarUrl);
+      setInputValue(profileAvatarUrl);
+    }
   }, [profileAvatarUrl]);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const url = e.target.value;
-    setPreviewUrl(url);
-    onChangeAvatar(url);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
     setError('');
   };
 
-  const handleRemove = () => {
-    onChangeAvatar(''); // очищуємо
-    setPreviewUrl('');
+  const handleUpload = () => {
+    if (!inputValue.trim()) {
+      setError('Please enter image URL');
+      return;
+    }
+
+    try {
+      new URL(inputValue);
+      setPreviewUrl(inputValue);
+      onChangeAvatar(inputValue);
+    } catch {
+      setError('Invalid URL format');
+    }
   };
 
   return (
-    <div>
+    <div className={css.container}>
       <div className={css.picker}>
-        {previewUrl && (
-          <Image
-            src={previewUrl}
-            alt="Avatar preview"
-            width={300}
-            height={300}
-            className={css.avatar}
-          />
-        )}
-        <label
-          className={previewUrl ? `${css.wrapper} ${css.reload}` : css.wrapper}
-        >
-          Paste avatar URL
+        <Image
+          src={previewUrl || defaultAvatar}
+          alt="Avatar preview"
+          width={300}
+          height={300}
+          className={css.avatar}
+        />
+
+        <div className={css.urlBox}>
           <input
             type="text"
             placeholder="Paste avatar URL"
-            value={previewUrl}
-            onChange={handleFileChange}
-            className={css.inputNo}
+            value={inputValue}
+            onChange={handleChange}
+            className={css.inputUrl}
           />
-        </label>
-        {previewUrl && (
+
           <Button
-            variant="primary"
-            // className={css.remove}
-            onClick={handleRemove}
+            variant="secondary"
+            className={css.upload}
+            onClick={handleUpload}
           >
-            ❌
+            Save avatar
           </Button>
-        )}
+        </div>
       </div>
+
       {error && <p className={css.error}>{error}</p>}
     </div>
   );

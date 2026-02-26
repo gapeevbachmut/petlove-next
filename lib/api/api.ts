@@ -130,7 +130,7 @@ export const logout = () => {
 
 //  UPDATE  USER (edit  profile)
 
-export const updateMe = async (data: { name?: string; avatar?: string }) => {
+export const updateMe = async (data: UpdateUserRequest) => {
   const res = await apiClient.patch<User>('/users/current/edit', data);
 
   return res.data;
