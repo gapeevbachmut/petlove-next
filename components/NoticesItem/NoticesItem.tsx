@@ -32,24 +32,22 @@ const NoticesItem = ({ item }: Props) => {
   const handlePetsLike = () => {
     if (!user) {
       setIsAuthModalOpen(true);
+      return;
     }
     // якщо є юзер додати до обраного
     if (user)
       try {
+        const favorites = user.noticesFavorites ?? [];
+
         let updatedFavorites: Notice[];
 
         if (isFavorite) {
           //  Видалення з обраного
-          updatedFavorites = user.noticesFavorites.filter(
-            fav => fav._id !== item._id
-          );
+          updatedFavorites = favorites.filter(fav => fav._id !== item._id);
         } else {
           //  Додавання в обране
-          updatedFavorites = [...user.noticesFavorites, item];
+          updatedFavorites = [...favorites, item];
         }
-
-        //  API для toggle —  тут
-        // await toggleFavorite(item._id);
 
         setUser({
           ...user,
