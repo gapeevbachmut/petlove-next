@@ -16,7 +16,8 @@ const NoticesItem = ({ item }: Props) => {
   const user = useAuthStore(state => state.user);
   const setUser = useAuthStore(state => state.setUser);
 
-  const isFavorite = user?.noticesFavorites?.some(fav => fav._id === item._id);
+  const isFavorite =
+    user?.noticesFavorites?.some(fav => fav._id === item._id) ?? false;
 
   const [isNoticeModalOpen, setIsNoticeModalOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -129,7 +130,11 @@ const NoticesItem = ({ item }: Props) => {
 
       {isNoticeModalOpen && (
         <Modal onClose={() => setIsNoticeModalOpen(false)}>
-          <NoticesPetModal item={item} />
+          <NoticesPetModal
+            item={item}
+            onClick={handlePetsLike}
+            isFavorite={isFavorite}
+          />
         </Modal>
       )}
 

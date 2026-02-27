@@ -8,7 +8,8 @@ type ButtonVariant =
   | 'tertiary'
   | 'quaternary'
   | 'text'
-  | 'simbol';
+  | 'simbol'
+  | 'disabled';
 
 type ButtonProps = {
   children: React.ReactNode; //Текст або іконка всередині кнопки

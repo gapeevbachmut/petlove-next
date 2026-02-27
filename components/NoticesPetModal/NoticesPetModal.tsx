@@ -2,14 +2,20 @@ import { Notice } from '@/types/api-types';
 import Image from 'next/image';
 import css from './NoticesPetModal.module.css';
 import Button from '../Button/Button';
+import Link from 'next/link';
 
-type Props = { item: Notice };
+type Props = {
+  item: Notice;
+  onClick: () => void;
+  isFavorite: boolean;
+};
 
-export default function NoticesPetModal({ item }: Props) {
-  const handleAddTo = () => {};
+export default function NoticesPetModal({ item, onClick, isFavorite }: Props) {
+  const handleAddTo = () => {
+    onClick();
+  };
   return (
     <div className={css.container}>
-      <div className={css.imgContainer}></div>
       <div className={css.imageBox}>
         <p className={css.imgText}>Sell</p>
         <Image
@@ -56,21 +62,26 @@ export default function NoticesPetModal({ item }: Props) {
         <p className={css.price}>$ {item.price}</p>
       </div>
 
-      {/* <div className={css.buttonBox}>
-        <Button className={css.add} variant="primary" onClick={handleAddTo}>
-          Add to
+      <div className={css.buttonBox}>
+        <Button
+          className={css.add}
+          // variant="primary"
+          onClick={handleAddTo}
+          variant={isFavorite ? 'disabled' : 'primary'}
+          // onClick={onClick}
+          disabled={isFavorite}
+        >
+          {isFavorite ? 'Added' : 'Add to'}
           <svg width={18} height={18} className={css.heart}>
-            <use href="/images/sprite.svg#icon-heart"></use>
+            <use href="/images/heart-white.svg"></use>
           </svg>
         </Button>
-        <Button
-          className={css.contact}
-          variant="secondary"
-          onClick={handleAddTo}
-        >
-          Contact
+        <Button className={css.contact} variant="secondary">
+          <Link href="https://sales-lp-ua.goit.global/" target="_blank">
+            Contact
+          </Link>
         </Button>
-      </div> */}
+      </div>
     </div>
   );
 }
