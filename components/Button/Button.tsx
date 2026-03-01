@@ -16,7 +16,7 @@ type ButtonProps = {
   onClick?: () => void; // Що виконується при кліку
   variant?: ButtonVariant; // стилізація
   disabled?: boolean; //  Чи активна
-  // type?: string;
+  type?: string;
   className?: string;
 };
 
@@ -25,7 +25,7 @@ export default function Button({
   onClick,
   variant = 'primary',
   disabled = false,
-  // type,
+  type,
   className,
 }: ButtonProps) {
   return (

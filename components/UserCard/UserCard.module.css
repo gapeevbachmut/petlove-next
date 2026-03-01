@@ -56,3 +56,10 @@
     margin-left: 20px;
     margin-bottom: 30px;
 }
+
+@media (min-width: 1280px) {
+    .container {
+        background-color: #fff;
+        border-radius: 30px;
+    }
+}

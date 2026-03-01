@@ -2,7 +2,6 @@ import { useAuthStore } from '@/stores/zustand/authStore';
 import css from './UserCard.module.css';
 import Image from 'next/image';
 import Button from '../Button/Button';
-import { useState } from 'react';
 import { logout } from '@/lib/api/api';
 import { useRouter } from 'next/navigation';
 
@@ -10,7 +9,6 @@ export default function UserCard() {
   const router = useRouter();
 
   const user = useAuthStore(state => state.user);
-  const [isPhone, setIsPhone] = useState(null);
 
   const avatarSrc =
     user?.avatar && user.avatar.trim() !== ''
@@ -22,6 +20,8 @@ export default function UserCard() {
     // clearIsAuthenticated();
     router.push('/');
   };
+
+  // console.log('user-card', user);
   return (
     <div className={css.container}>
       <div className={css.imageBox}>
@@ -42,9 +42,9 @@ export default function UserCard() {
           <li className={css.userData}>
             <p className={css.userText}>{user?.email}</p>
           </li>
-          {isPhone && (
+          {user?.phone && (
             <li className={css.userData}>
-              <p className={css.userText}>+380 {user?.phone}</p>
+              <p className={css.userText}>{user?.phone}</p>
             </li>
           )}
         </ul>

@@ -41,18 +41,33 @@ export default function Profile() {
     }
   };
 
+  // console.log('user-profile', user);
+
   return (
     <div className={css.container}>
       <div className={css.btnBox}>
-        <Button variant="simbol" onClick={handleModalEditUser}>
+        <Button variant="primary" className={css.userBtn} disabled>
+          {user?.name}
+          <svg width={18} height={18} className={css.svgUser}>
+            <use href="/images/user-white.svg"></use>
+          </svg>
+        </Button>
+
+        <Button
+          variant="simbol"
+          onClick={handleModalEditUser}
+          className={css.editBtn}
+        >
           <svg width={18} height={18}>
             <use href="/images/sprite.svg#icon-edit"></use>
           </svg>
         </Button>
       </div>
+      <div className={css.profileInfoBox}>
+        <UserCard />
+        <UserFavoriteNoticesList notices={favoriteNotices} />
+      </div>
 
-      <UserCard />
-      <UserFavoriteNoticesList notices={favoriteNotices} />
       {isModalEditUser && (
         <Modal onClose={closeModal}>
           <ModalEditUser onClose={closeModal} />

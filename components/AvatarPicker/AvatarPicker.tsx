@@ -20,10 +20,9 @@ const AvatarPicker = ({ onChangeAvatar, profileAvatarUrl }: Props) => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    if (profileAvatarUrl) {
-      setPreviewUrl(profileAvatarUrl);
-      setInputValue(profileAvatarUrl);
-    }
+    const avatar = profileAvatarUrl?.trim() || defaultAvatar;
+    setPreviewUrl(avatar);
+    setInputValue(profileAvatarUrl ?? '');
   }, [profileAvatarUrl]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,16 +30,42 @@ const AvatarPicker = ({ onChangeAvatar, profileAvatarUrl }: Props) => {
     setError('');
   };
 
+  // const handleUpload = () => {
+  //   if (!inputValue.trim()) {
+  //     setError('Please enter image URL');
+  //     return;
+  //   }
+
+  //   try {
+  //     new URL(inputValue);
+  //     setPreviewUrl(inputValue);
+  //     onChangeAvatar(inputValue);
+  //   } catch {
+  //     setError('Invalid URL format');
+  //   }
+  // };
+
   const handleUpload = () => {
-    if (!inputValue.trim()) {
+    const trimmed = inputValue.trim();
+
+    if (!trimmed) {
       setError('Please enter image URL');
       return;
     }
 
     try {
-      new URL(inputValue);
-      setPreviewUrl(inputValue);
-      onChangeAvatar(inputValue);
+      new URL(trimmed);
+
+      const isImage = /\.(jpg|jpeg|png|webp|gif)$/i.test(trimmed);
+
+      if (!isImage) {
+        setError('URL must point to an image');
+        return;
+      }
+
+      setPreviewUrl(trimmed);
+      onChangeAvatar(trimmed);
+      setError('');
     } catch {
       setError('Invalid URL format');
     }
@@ -68,10 +93,11 @@ const AvatarPicker = ({ onChangeAvatar, profileAvatarUrl }: Props) => {
 
           <Button
             variant="secondary"
+            type="button"
             className={css.upload}
             onClick={handleUpload}
           >
-            Save avatar
+            Previev avatar
           </Button>
         </div>
       </div>

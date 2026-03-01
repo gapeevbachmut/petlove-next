@@ -23,20 +23,25 @@ export default function ModalEditUser({ onClose }: Props) {
 
   const handleSaveUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    if (!currentUser) return;
     try {
       setLoading(true);
 
-      const updatedUser = await updateMe({
-        name: username,
-        email,
-        phone,
-        avatar: avatarUrl,
-      });
+      const dataToSend: any = {};
+
+      if (username.trim()) dataToSend.name = username.trim();
+      if (phone.trim()) dataToSend.phone = phone.trim();
+      if (avatarUrl.trim()) dataToSend.avatar = avatarUrl.trim();
+      if (email.trim()) dataToSend.email = email.trim();
+
+      console.log('Sending:', dataToSend);
+
+      const updatedUser = await updateMe(dataToSend);
 
       setUser({
         ...updatedUser,
         token: currentUser?.token,
+        noticesFavorites: currentUser.noticesFavorites ?? [],
       });
 
       onClose();

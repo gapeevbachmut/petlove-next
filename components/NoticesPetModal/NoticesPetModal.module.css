@@ -147,6 +147,12 @@
         padding: 40px;
     }
 
+    .imageBox {
+        width: 150px;
+        height: 150px;
+
+    }
+
     .descrTitle {
         font-size: 14px;
     }
